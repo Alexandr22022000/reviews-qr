@@ -1,24 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
+import {Switch, Route} from 'react-router-dom';
 import './App.css';
+import Navbar from './core/containers/Navbar';
+import Login from './login/containers/Login';
+import SignUp from './login/containers/SignUp';
+import SignUpConfirm from './login/containers/SignUpConfirm';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+        <Route exact path="/" children={<Navbar></Navbar>}/>
+        <Route exact path="/login" children={<Login/>}/>
+        <Route exact path="/signup" children={<SignUp/>}/>
+        <Route exact path="/signup_confirm" children={<SignUpConfirm/>}/>
+      </Switch>
     </div>
   );
 }
