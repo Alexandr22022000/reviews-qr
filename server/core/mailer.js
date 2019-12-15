@@ -55,7 +55,6 @@ module.exports = (msg) => { //FIXME add cool connection controller
             }
 
             consoleLog('Sent message to ' + msg.to);
-            consoleLog(info);
             resolve();
         });
     });

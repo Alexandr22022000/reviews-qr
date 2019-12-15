@@ -22,6 +22,7 @@ const defaultState = {
         confirm_password: null,
     },
     checkEmail: false,
+    inProcess: false, //FIXME add process controller support
 };
 
 const statuses = (state = defaultState, action) => {

@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 
 class Login extends React.Component {
     render () {
-        if (this.props.user_name) return <Redirect href="/"/>
+        if (this.props.user_name) return <Redirect href="/"/>;
 
         return (
             <Dialog open={true} aria-labelledby="form-dialog-title">
@@ -51,7 +51,7 @@ class Login extends React.Component {
                     <h5 style={{color: 'red'}}>{this.props.errors.google_login}</h5>
                 </DialogContent>
                 <DialogActions>
-                    <Link to="/restore-password" style={{'text-decoration': 'none'}}>
+                    <Link to="/restore_password_request" style={{'text-decoration': 'none'}}>
                         <Button>
                             Forget password
                         </Button>

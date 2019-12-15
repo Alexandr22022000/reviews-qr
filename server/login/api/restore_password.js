@@ -1,35 +1,32 @@
 const UserModel = require('../../core/models/User'),
     IntentModel = require('../../core/models/Intent'),
     {consoleLog} = require('../../core/logs'),
+    bcrypt = require('bcrypt-nodejs'),
     IMAGES = require('../../core/constants/images'),
     INTENT = require('../../core/constants/intent_types');
 
 module.exports = (req, res) => {
-    let {token} = req.body;
+    let {token, password} = req.body;
 
-    if (!token || !token.trim())
+    if (!token || !token.trim() || !password || !password.trim())
         return res.status(400).send({
-            message: "Error: token can't be empty"
+            message: "Error: token or password can't be empty"
         });
 
-    IntentModel.findOne({token, type: INTENT.CREATE_USER}, (err, Intent) => {
+    IntentModel.findOne({token, type: INTENT.RESTORE_PASSWORD}, (err, Intent) => {
         if (err || !Intent)
             return res.status(200).send({
                 message: "Your email token is outdated! Please get new email token"
             });
 
-        const User = new UserModel({
-            email: Intent.email,
-            password: Intent.data.password,
-            name: Intent.data.name,
-            img: IMAGES.USER_DEFAULT,
-        });
-
-        Intent.remove(err => {
-            if (err)
+        UserModel.findOne({_id: Intent.userId}, (err, User) => {
+            if (err || !User)
                 return res.status(500).send({
-                    message: "Error: can't remove intent"
+                    message: "Error: User not found"
                 });
+
+            password = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+            User.password = password;
 
             User.save(err => {
                 if (err) {
@@ -40,6 +37,7 @@ module.exports = (req, res) => {
                     });
                 }
 
+                Intent.remove();
                 req.session.user_id = User._id;
                 res.status(200).send({
                     email: User.email,
