@@ -2,7 +2,7 @@ const mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     crypto = require('crypto');
 
-var IntentSchema = mongoose.Schema({
+const IntentSchema = Schema({
     type: String,
     email: String,
     token: String,

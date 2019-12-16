@@ -41,6 +41,8 @@ module.exports = (req, res) => {
                 }
 
                 req.session.user_id = User._id;
+                req.session.user_email = User.email;
+                req.session.user_name = User.name;
                 res.status(200).send({
                     email: User.email,
                     name: User.name,
