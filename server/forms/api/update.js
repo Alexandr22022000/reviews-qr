@@ -1,5 +1,4 @@
-const Company = require('../../core/models/Company'),
-    Form = require('../../core/models/Form');
+const getFormById = require('../getFormById');
 
 module.exports = (req, res) => {
     const {id, name, img, style, outMsg} = req.body;
@@ -9,20 +8,8 @@ module.exports = (req, res) => {
             message: "Error: id can't be empty",
         });
 
-    Company.find({$or: [{creatorId: req.session.user_id}, {admins: req.session.user_id}], isDeleted: false}, (err, companies) => {
-        if (err || !companies)
-            return res.status(404).send({
-                message: "Error: company not found",
-            });
-
-        let companiesFilter = companies.map(company => ({creatorId: company._id}));
-
-        Form.findOne({_id: id, $or: [{creatorId: req.session.user_id}, {admins: req.session.user_id}, ...companiesFilter], isDeleted: false}, (err, form) => {
-            if (err || !form)
-                return res.status(404).send({
-                    message: "Error: form not found",
-                });
-
+    getFormById(id, req.session.user_id)
+        .then(form => {
             form.name = name;
             form.img = img;
             if (style) form.style = style;
@@ -36,6 +23,10 @@ module.exports = (req, res) => {
 
                 res.status(200).send({});
             });
+        })
+        .catch(e => {
+            res.status(404).send({
+                message: e,
+            });
         });
-    });
 };
