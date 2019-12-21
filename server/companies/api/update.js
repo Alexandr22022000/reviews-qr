@@ -3,7 +3,7 @@ const Company = require('../../core/models/Company');
 module.exports = (req, res) => {
     const {id, name, email, img} = req.body;
 
-    if (!id || !id.trim() || !name || !name.trim() || !email || !email.trim() || !img || !img.trim())
+    if (!id || !id.trim() || !name || !name.trim() || !email || !email.trim())
         return res.status(400).send({
             message: "Error: id, name, email or img can't be empty",
         });
