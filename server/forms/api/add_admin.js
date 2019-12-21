@@ -19,7 +19,7 @@ module.exports = (req, res) => {
         Form.findOne({_id: intent.objectId, isDeleted: false}, (err, form) => {
             if (err || !form)
                 return res.status(404).send({
-                    message: "Error: company ont found",
+                    message: "Error: form ont found",
                 });
 
             form.admins.push(req.session.user_id);
@@ -29,6 +29,7 @@ module.exports = (req, res) => {
                         message: "Error: can't save intent",
                     });
 
+                intent.remove();
                 res.status(200).send({id: form._id});
             });
         });

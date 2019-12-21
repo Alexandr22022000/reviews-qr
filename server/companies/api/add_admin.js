@@ -23,13 +23,13 @@ module.exports = (req, res) => {
                 });
 
             company.admins.push(req.session.user_id);
-
             company.save(err => {
                 if (err)
                     return res.status(500).send({
-                        message: "Error: can't save intent",
+                        message: "Error: can't save company",
                     });
 
+                intent.remove();
                 res.status(200).send({id: company._id});
             });
         });
