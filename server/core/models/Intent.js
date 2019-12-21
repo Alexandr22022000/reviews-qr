@@ -15,6 +15,6 @@ const IntentSchema = Schema({
 
 IntentSchema.path('createdAt').default(() => new Date());
 
-IntentSchema.path('token').default(() => crypto.randomBytes(64).toString('hex'));
+IntentSchema.path('token').default(() => crypto.randomBytes(8).toString('hex'));
 
 module.exports = mongoose.model('Intent', IntentSchema);

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    crypto = require('crypto');
 
 const codeSchema = mongoose.Schema({
     formId: Schema.ObjectId,
@@ -22,5 +23,6 @@ const codeSchema = mongoose.Schema({
 
 codeSchema.path('createdAt').default(() => new Date());
 codeSchema.path('isDeleted').default(() => false);
+codeSchema.path('link').default(() => crypto.randomBytes(8).toString('hex'));
 
 module.exports = mongoose.model('Code', codeSchema);
