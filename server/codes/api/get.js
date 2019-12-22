@@ -23,6 +23,7 @@ module.exports = (req, res) => {
                     description: code.description,
                     type: code.type,
                     style: code.style,
+                    link: code.link,
                 });
             })
             .catch(e => {

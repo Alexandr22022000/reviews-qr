@@ -7,6 +7,7 @@ import SignUp from './login/containers/SignUp';
 import SignUpConfirm from './login/containers/SignUpConfirm';
 import RestorePassword from './login/containers/RestorePassword';
 import RestorePasswordRequest from './login/containers/RestorePasswordRequest';
+import TempCompanent from './TempCompanent';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/signup_confirm" children={<SignUpConfirm/>}/>
         <Route exact path="/restore_password" children={<RestorePassword/>}/>
         <Route exact path="/restore_password_request" children={<RestorePasswordRequest/>}/>
+        <Route exact path="/temp" children={<TempCompanent/>}/>
       </Switch>
     </div>
   );
