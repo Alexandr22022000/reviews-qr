@@ -1,7 +1,7 @@
 const getFormById = require('../getFormById');
 
 module.exports = (req, res) => {
-    const {id, name, img, style, outMsg} = req.body;
+    const {id, name, img, style, msg} = req.body;
 
     if (!id || !id.trim() || !name || !name.trim())
         return res.status(400).send({
@@ -13,7 +13,7 @@ module.exports = (req, res) => {
             form.name = name;
             form.img = img;
             if (style) form.style = style;
-            if (outMsg) form.outMsg = outMsg;
+            if (msg) form.outMsg = msg;
 
             form.save(err => {
                 if (err)

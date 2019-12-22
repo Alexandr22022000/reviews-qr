@@ -13,7 +13,7 @@ module.exports = (id, targetId, additionalName) => {
                     name: formOld.name + (additionalName || ""),
                     img: formOld.img,
                     style: formOld.style,
-                    outMsg: formOld.outMsg,
+                    msg: formOld.msg,
                     questions: formOld.questions.filter(question => !question.isDeleted),
                     creatorId: targetId,
                 });

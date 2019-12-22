@@ -42,7 +42,7 @@ module.exports = (req, res) => {
                     isCreator: mainObj.creatorId === req.session.user_id,
                     companyName: mainObj._id === form._id ? null : mainObj.name,
                     admins: users,
-                    outMsg: form.outMsg,
+                    msg: form.msg,
                     style: form.style,
                     questions: form.questions,
                 });

@@ -24,9 +24,11 @@ const formSchema = mongoose.Schema({
         color2: String,
         textFont: String,
     },
-    outMsg: {
+    msg: {
         title: String,
         description: String,
+        titleOut: String,
+        descriptionOut: String,
     },
     createdAt: Date,
     isDeleted: Boolean,

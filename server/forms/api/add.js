@@ -4,7 +4,7 @@ const Code = require('../../core/models/Code'),
     IMAGES = require('../../core/constants/images'),
     CODE_TYPES = require('../../core/constants/code_types'),
     STYLE = require('../../core/constants/styles'),
-    OUT_MSG = require('../../core/constants/outMsg'),
+    FORM_MSG = require('../../core/constants/form_msg'),
     NAMES = require('../../core/constants/names');
 
 module.exports = (req, res) => {
@@ -42,7 +42,7 @@ const createForm = (creatorId, name) => {
             admins: [],
             questions: [],
             style: STYLE,
-            outMsg: OUT_MSG,
+            msg: FORM_MSG,
         });
 
         form.save(err => {
