@@ -2,7 +2,7 @@ const Code = require('../../core/models/Code'),
     getFormById = require('../../forms/getFormById');
 
 module.exports = (req, res) => {
-    const {id} = req.body;
+    const {id} = req.query;
 
     if (!id || !id.trim())
         return res.status(400).send({

@@ -4,7 +4,7 @@ const Code = require('../../core/models/Code'),
     SORT_TYPES = require('../../core/constants/sort_types');
 
 module.exports = (req, res) => {
-    let {id, type, date_start, date_end, show_deleted, sort_by} = req.body;
+    let {id, type, date_start, date_end, show_deleted, sort_by} = req.query;
 
     if (!id || !id.trim())
         return res.status(400).send({
