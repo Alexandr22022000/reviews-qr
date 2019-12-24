@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 
 class RestorePassword extends React.Component {
     render () {
-        if (this.props.user_name) return <Redirect href="/"/>;
+        if (this.props.user_name) return <Redirect to="/"/>;
 
         return (
             <Dialog open={true} aria-labelledby="form-dialog-title">
