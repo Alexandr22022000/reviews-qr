@@ -8,14 +8,9 @@ module.exports = (req, res) => {
             message: "Error: token, email or name can't be empty"
         });
 
-    UserModel.findOne({email}, (err, UserOld) => {
-        if (err || UserOld)
-            return res.status(200).send({
-                message: "User already exist",
-            });
-
-        UserModel.findOne({googleToken: token}, (err, User) => {
-            if (!err && User) {
+    UserModel.findOne({email}, (err, User) => {
+        if (!err && User) {
+            if (User.googleToken === token) {
                 req.session.user_id = User._id;
                 return res.status(200).send({
                     name: User.name,
@@ -24,21 +19,25 @@ module.exports = (req, res) => {
                 });
             }
 
-            const UserNew = new UserModel({
-                email,
-                name,
-                img,
-                googleToken: token,
+            return res.status(200).send({
+                message: "Incorrect google token",
             });
+        }
 
-            UserNew.save();
+        const UserNew = new UserModel({
+            email,
+            name,
+            img,
+            googleToken: token,
+        });
 
-            req.session.user_id = UserNew._id;
-            res.status(200).send({
-                name: UserNew.name,
-                email: UserNew.email,
-                img: UserNew.img,
-            });
+        UserNew.save();
+
+        req.session.user_id = UserNew._id;
+        res.status(200).send({
+            name: UserNew.name,
+            email: UserNew.email,
+            img: UserNew.img,
         });
     });
 };
