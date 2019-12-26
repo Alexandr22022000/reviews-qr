@@ -1,4 +1,4 @@
 module.exports = (req, res) => {
     req.session.destroy();
-    res.redirect('/login');
+    res.status(401).send({});
 };
