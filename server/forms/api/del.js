@@ -9,17 +9,17 @@ module.exports = (req, res) => {
         });
 
     getFormById(id, req.session.user_id)
-        .then((form, companies) => {
+        .then(({form, companies}) => {
             let isMy = false;
-            if (form.creatorId === req.session.user_id) isMy = true;
+            if (form.creatorId +'' === req.session.user_id +'') isMy = true;
             if (!isMy) companies.forEach(company => {
-                if (form.creatorId === company._id) isMy = true;
+                if (form.creatorId +'' === company._id +'') isMy = true;
             });
 
             if (isMy)
                 form.isDeleted = true;
             else
-                form.admins = form.admins.filter(admin => admin !== req.session.user_id);
+                form.admins = form.admins.filter(admin => admin +'' !== req.session.user_id) +'';
 
             form.save(err => {
                 if (err)

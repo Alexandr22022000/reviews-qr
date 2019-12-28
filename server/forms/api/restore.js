@@ -9,7 +9,7 @@ module.exports = (req, res) => {
         });
 
     getFormById(id, req.session.user_id, true)
-        .then(form => {
+        .then(({form}) => {
             form.isDeleted = false;
 
             form.save(err => {

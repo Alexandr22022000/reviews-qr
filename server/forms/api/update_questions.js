@@ -9,7 +9,7 @@ module.exports = (req, res) => {
         });
 
     getFormById(id, req.session.user_id)
-        .then(form => {
+        .then(({form}) => {
             form.questions = questions;
 
             form.save(err => {

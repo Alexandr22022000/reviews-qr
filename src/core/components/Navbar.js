@@ -36,7 +36,7 @@ class Navbar extends React.Component {
 
             companies = companies.map(company => (
                 <ListItem
-                    style={company.id === this.state.activeCompanyId ? {backgroundColor: '#b3b3b3'} : {}}
+                    style={company.id === this.props.activeCompanyId ? {backgroundColor: '#b3b3b3'} : {}}
                     component={Link}
                     to={"/?company=" + company.id}
                     onClick={() => this.onChangeCompany(company.id)}
@@ -70,7 +70,7 @@ class Navbar extends React.Component {
                             <MenuIcon />
                         </IconButton>
                         {this.props.logo}
-                        <Typography variant="h6">{this.props.name}</Typography>
+                        <Typography style={{marginLeft: '10px'}} variant="h6">{this.props.name}</Typography>
                         <Typography variant="h6" style={{flexGrow: '1'}}/>
                         {this.props.children}
                         <IconButton
@@ -124,13 +124,14 @@ class Navbar extends React.Component {
 
         let activeCompanyId = query.parse(window.location.search).company;
         if (window.location.pathname === "/" && !activeCompanyId) activeCompanyId = SEARCH.COMPANY_ALL;
+        this.props.setActiveCompanyId(activeCompanyId);
+        if (this.props.onChangeCompany) this.props.onChangeCompany(activeCompanyId);
 
         this.setState({
             showAccountMenu: false,
             showDrawer: false,
             newCompanyName: "New company",
             addCompanyError: "",
-            activeCompanyId,
         });
     }
 
@@ -202,7 +203,7 @@ class Navbar extends React.Component {
     }
 
     onChangeCompany (id) {
-        this.setState({activeCompanyId: id});
+        this.props.setActiveCompanyId(id);
         if (this.props.onChangeCompany) this.props.onChangeCompany(id);
     }
 }

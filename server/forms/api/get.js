@@ -10,7 +10,7 @@ module.exports = (req, res) => {
         });
 
     getFormById(id, req.session.user_id)
-        .then((form, companies) => {
+        .then(({form, companies}) => {
 
             let mainObj = form;
             companies.forEach(company => {

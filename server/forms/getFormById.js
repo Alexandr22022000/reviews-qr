@@ -7,11 +7,12 @@ module.exports = (id, userId, isDeleted) => {
             if (err || !companies) return reject("Error: companies not found");
 
             let companiesFilter = companies.map(company => ({creatorId: company._id}));
+            if (!isDeleted) isDeleted = false;
 
             Form.findOne({_id: id, $or: [{creatorId: userId}, {admins: userId}, ...companiesFilter], isDeleted}, (err, form) => {
                 if (err || !form) return reject("Error: form not found");
 
-                resolve(form, companies);
+                resolve({form, companies});
             });
         });
     });

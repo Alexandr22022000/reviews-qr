@@ -13,7 +13,7 @@ module.exports = (req, res) => {
         });
 
     getFormById(id, req.session.user_id)
-        .then(form => {
+        .then(({form}) => {
             if (!email) {
                 return copyForm(id, req.session.user_id, "_copy")
                     .then(id => res.status(200).send({id}))

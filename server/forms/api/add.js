@@ -17,7 +17,7 @@ module.exports = (req, res) => {
 
     if (!company_id) {
         return createForm(req.session.user_id, name)
-            .then(() => res.status(200).send({}))
+            .then(id => res.status(200).send({id}))
             .catch(e => res.status(500).send({message: e}));
     }
 
@@ -28,7 +28,7 @@ module.exports = (req, res) => {
             });
 
         createForm(company._id, name)
-            .then(() => res.status(200).send({}))
+            .then(id => res.status(200).send({id}))
             .catch(e => res.status(500).send({message: e}));
     });
 };
@@ -59,7 +59,7 @@ const createForm = (creatorId, name) => {
 
             code.save(err => {
                 if (err) return reject("Error: can't save code");
-                resolve();
+                resolve(form._id);
             });
         });
     });

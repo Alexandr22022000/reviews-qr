@@ -11,7 +11,7 @@ module.exports = (req, res) => {
         });
 
     getFormById(id, req.session.user_id)
-        .then(form => {
+        .then(({form}) => {
             Company.findOne({_id: company_id, $or: [{creatorId: req.session.user_id}, {admins: req.session.user_id}], isDeleted: false}, (err, Company) => {
                 if (err || !Company)
                     return res.status(404).send({
