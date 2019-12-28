@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import SEARCH from '../../core/constants/search';
 import CreateForm from "../../froms/containers/CreateForm";
 import DeleteRestoreForm from "../../froms/containers/DeleteRestoreForm";
+import CompanyEditor from '../containers/CompanyEditor';
 
 import BusinessIcon from "@material-ui/icons/Business";
 import IconButton from "@material-ui/core/IconButton";
@@ -32,6 +33,8 @@ import ShareIcon from "@material-ui/icons/Share";
 
 class CompanyPage extends React.Component {
     render () {
+        const isCompany = this.props.companyId !== SEARCH.COMPANY_SHARED && this.props.companyId !== SEARCH.COMPANY_MY && this.props.companyId !== SEARCH.COMPANY_ALL;
+
         let forms = this.props.forms;
         if (forms) {
             forms = forms.map(form => {
@@ -108,22 +111,27 @@ class CompanyPage extends React.Component {
         return (
             <div>
                 <Navbar onChangeCompany={this.onChangeCompany.bind(this)} logo={this.getCompanyIcon()} name={this.getCompanyName()}>
-                    <IconButton
-                        aria-label="account of current user"
-                        aria-controls="primary-search-account-menu"
-                        aria-haspopup="true"
-                        color="inherit"
-                    >
-                        <SupervisorAccountIcon/>
-                    </IconButton>
-                    <IconButton
-                        aria-label="account of current user"
-                        aria-controls="primary-search-account-menu"
-                        aria-haspopup="true"
-                        color="inherit"
-                    >
-                        <SettingsIcon/>
-                    </IconButton>
+                    {isCompany ? (
+                        <div>
+                            <IconButton
+                                aria-label="account of current user"
+                                aria-controls="primary-search-account-menu"
+                                aria-haspopup="true"
+                                color="inherit"
+                            >
+                                <SupervisorAccountIcon/>
+                            </IconButton>
+                            <IconButton
+                                aria-label="account of current user"
+                                aria-controls="primary-search-account-menu"
+                                aria-haspopup="true"
+                                color="inherit"
+                                onClick={() => this.setState({openEditor: true})}
+                            >
+                                <SettingsIcon/>
+                            </IconButton>
+                        </div>
+                    ) : ""}
                 </Navbar>
 
                 <TableContainer component={Paper} style={{maxHeight: 'calc(100vh - 65px)'}}>
@@ -159,6 +167,10 @@ class CompanyPage extends React.Component {
                     <AddIcon/>
                 </Fab>
 
+                {!this.state.openEditor ? "" : (
+                    <CompanyEditor open={true} onClose={() => this.setState({openEditor: false})}/>
+                )}
+
                 <CreateForm open={this.state.openCreateForm} onClose={() => this.setState({openCreateForm: false})}/>
                 <DeleteRestoreForm formId={this.state.deleteFormId} formName={this.state.deleteFormName} isRestore={this.state.isRestore} onClose={() => this.setState({deleteFormId: null})}/>
             </div>
@@ -172,6 +184,7 @@ class CompanyPage extends React.Component {
             deleteFormId: null,
             deleteFormName: null,
             isRestore: false,
+            openEditor: false,
         });
     }
 

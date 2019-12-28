@@ -27,7 +27,7 @@ module.exports = (req, res) => {
                 id: User._id,
                 name: User.name,
                 img: User.img,
-                isCreator: User._id === Company.creatorId,
+                isCreator: User._id +"" === Company.creatorId +"",
             }));
 
             res.status(200).send({
@@ -35,7 +35,7 @@ module.exports = (req, res) => {
                 name: Company.name,
                 img: Company.img,
                 email: Company.email,
-                isCreator: Company.creatorId === req.session.user_id,
+                isCreator: Company.creatorId +"" === req.session.user_id +"",
                 admins: users,
             });
         });

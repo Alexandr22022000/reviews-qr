@@ -14,7 +14,7 @@ module.exports = (req, res) => {
                 message: "Error: company ont found",
             });
 
-        if (company.creatorId === req.session.user_id) {
+        if (company.creatorId +'' === req.session.user_id +'') {
             company.isDeleted = true;
         }
         else {

@@ -12,6 +12,8 @@ module.exports = (req, res) => {
         if (!err && User) {
             if (User.googleToken === token) {
                 req.session.user_id = User._id;
+                req.session.user_name = User.name;
+                req.session.user_email = User.email;
                 return res.status(200).send({
                     name: User.name,
                     email: User.email,
@@ -34,6 +36,8 @@ module.exports = (req, res) => {
         UserNew.save();
 
         req.session.user_id = UserNew._id;
+        req.session.user_name = UserNew.name;
+        req.session.user_email = UserNew.email;
         res.status(200).send({
             name: UserNew.name,
             email: UserNew.email,
