@@ -6,6 +6,8 @@ import CreateForm from "../../froms/containers/CreateForm";
 import DeleteRestoreForm from "../../froms/containers/DeleteRestoreForm";
 import CompanyEditor from '../containers/CompanyEditor';
 
+import CompanyAdmins from '../../admins/containers/CompanyAdmins';
+
 import BusinessIcon from "@material-ui/icons/Business";
 import IconButton from "@material-ui/core/IconButton";
 import Table from '@material-ui/core/Table';
@@ -118,6 +120,7 @@ class CompanyPage extends React.Component {
                                 aria-controls="primary-search-account-menu"
                                 aria-haspopup="true"
                                 color="inherit"
+                                onClick={() => this.setState({openAdmins: true})}
                             >
                                 <SupervisorAccountIcon/>
                             </IconButton>
@@ -173,6 +176,9 @@ class CompanyPage extends React.Component {
 
                 <CreateForm open={this.state.openCreateForm} onClose={() => this.setState({openCreateForm: false})}/>
                 <DeleteRestoreForm formId={this.state.deleteFormId} formName={this.state.deleteFormName} isRestore={this.state.isRestore} onClose={() => this.setState({deleteFormId: null})}/>
+
+                <CompanyAdmins open={this.state.openAdmins} onClose={() => this.setState({openAdmins: false})}/>
+
             </div>
         );
     }
@@ -185,6 +191,7 @@ class CompanyPage extends React.Component {
             deleteFormName: null,
             isRestore: false,
             openEditor: false,
+            openAdmins: false,
         });
     }
 

@@ -18,7 +18,7 @@ module.exports = (req, res) => {
             company.isDeleted = true;
         }
         else {
-            company.admins = company.admins.filter(admin => admin !== req.session.user_id);
+            company.admins = company.admins.filter(admin => admin +'' !== req.session.user_id +'');
         }
 
         company.save(err => {

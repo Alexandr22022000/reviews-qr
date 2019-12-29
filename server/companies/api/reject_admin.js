@@ -16,7 +16,7 @@ module.exports = (req, res) => {
                 message: "Error: company ont found",
             });
 
-        company.admins = company.admins.filter(admin => admin !== admin_id);
+        company.admins = company.admins.filter(admin => admin +'' !== admin_id +'');
         company.save(err => {
             if (err)
                 return res.status(500).send({

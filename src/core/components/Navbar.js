@@ -18,7 +18,7 @@ import Divider from '@material-ui/core/Divider';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import BusinessIcon from '@material-ui/icons/Business';
-import ChatBubbleIcon from '@material-ui/icons/ChatBubble'; //FIXME add ReviewsQR logo
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble'; //FIXME add ReviewsQR logo and add Avatar component
 import ShareIcon from '@material-ui/icons/Share';
 import AddIcon from '@material-ui/icons/Add';
 import TextField from '@material-ui/core/TextField';
@@ -151,7 +151,7 @@ class Navbar extends React.Component {
         }
     }
 
-    renderAddButton () {
+    renderAddButton () { //FIXME add ADD icon
         switch (this.props.addButtonStatus) {
             case 0:
                 return (

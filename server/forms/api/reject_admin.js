@@ -16,7 +16,7 @@ module.exports = (req, res) => {
                 message: "Error: form ont found",
             });
 
-        form.admins = form.admins.filter(admin => admin !== admin_id);
+        form.admins = form.admins.filter(admin => admin +'' !== admin_id +'');
         form.save(err => {
             if (err)
                 return res.status(500).send({

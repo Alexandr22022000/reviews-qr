@@ -24,7 +24,7 @@ const adminData = {
     email: process.env.ADMIN_EMAIL || 'easyhotels24@gmail.com'//'support@neuronex.pro', //FIXME create good account!
 };
 
-const configuration = process.env.NO_LINUX_MAILER ? config : configLinux;
+const configuration = process.env.LINUX_MAILER ? configLinux : config;
 
 let transport, lastMsg;
 
