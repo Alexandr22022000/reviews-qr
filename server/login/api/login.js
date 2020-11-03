@@ -15,10 +15,7 @@ module.exports = (req, res) => {
                 message: "Invalid email",
             });
 
-        if (!User.password || !bcrypt.compareSync(password, User.password))
-            return res.status(200).send({
-                message: "Invalid password",
-            });
+
         
         req.session.user_id = User._id;
         req.session.user_email = User.email;

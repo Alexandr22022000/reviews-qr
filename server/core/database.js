@@ -31,6 +31,5 @@ exports.init = (app) => {
 
     mongoose.connect(DATABASE_URL, config.mongooseOptions); //FIXME check warning msg
 
-    mongoose.connection.on('error', () => consoleLog('ERROR!'));
-    mongoose.connection.once('open', () => consoleLog('SUCCESS!'));
+    mongoose.connection.on('error', () => consoleLog("Error: no database connection!"));
 };
