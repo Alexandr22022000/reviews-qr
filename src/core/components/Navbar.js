@@ -24,20 +24,21 @@ import ShareIcon from '@material-ui/icons/Share';
 import AddIcon from '@material-ui/icons/Add';
 import TextField from '@material-ui/core/TextField';
 import Skeleton from '@material-ui/lab/Skeleton';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { positions } from '@material-ui/system';
 
 class Navbar extends React.Component {
-    render () {
+    render() {
         let companies = [];
         if (this.props.companies) {
-            companies.push({name: "All", img: 'logo', id: SEARCH.COMPANY_ALL});
-            companies.push({name: "Personal", img: 'user', id: SEARCH.COMPANY_MY});
-            companies.push({name: "Shared", img: 'share', id: SEARCH.COMPANY_SHARED});
+            companies.push({ name: "All", img: 'logo', id: SEARCH.COMPANY_ALL });
+            companies.push({ name: "Personal", img: 'user', id: SEARCH.COMPANY_MY });
+            companies.push({ name: "Shared", img: 'share', id: SEARCH.COMPANY_SHARED });
             companies = companies.concat(this.props.companies);
 
             companies = companies.map(company => (
                 <ListItem
-                    style={company.id === this.props.activeCompanyId ? {backgroundColor: '#b3b3b3'} : {}}
+                    style={company.id === this.props.activeCompanyId ? { backgroundColor: '#b3b3b3' } : {}}
                     component={Link}
                     to={"/?company=" + company.id}
                     onClick={() => this.onChangeCompany(company.id)}
@@ -66,20 +67,20 @@ class Navbar extends React.Component {
                             edge="start"
                             color="inherit"
                             aria-label="open drawer"
-                            onClick={() => this.setState({showDrawer: true})}
+                            onClick={() => this.setState({ showDrawer: true })}
                         >
                             <MenuIcon />
                         </IconButton>
                         {this.props.logo}
-                        <Typography style={{marginLeft: '10px'}} variant="h6">{this.props.name}</Typography>
-                        <Typography variant="h6" style={{flexGrow: '1'}}/>
+                        <Typography style={{ marginLeft: '10px' }} variant="h6">{this.props.name}</Typography>
+                        <Typography variant="h6" style={{ flexGrow: '1' }} />
                         {this.props.children}
                         <IconButton
                             aria-label="account of current user"
                             aria-controls="primary-search-account-menu"
                             aria-haspopup="true"
                             color="inherit"
-                            onClick={() => this.setState({showAccountMenu: true})}
+                            onClick={() => this.setState({ showAccountMenu: true })}
                         >
                             <AccountCircle />
                         </IconButton>
@@ -90,7 +91,7 @@ class Navbar extends React.Component {
                             keepMounted
                             transformOrigin={{ vertical: 'top', horizontal: 'right' }}
                             open={this.state.showAccountMenu}
-                            onClose={() => this.setState({showAccountMenu: false})}
+                            onClose={() => this.setState({ showAccountMenu: false })}
                         >
                             <MenuItem component={Link} to={"/profile"}>Profile</MenuItem>
                             <MenuItem onClick={this.props.logout.bind(this)}>Logout</MenuItem>
@@ -100,12 +101,12 @@ class Navbar extends React.Component {
 
                 <SwipeableDrawer
                     open={this.state.showDrawer}
-                    onClose={() => this.setState({showDrawer: false})}
-                    onOpen={() => this.setState({showDrawer: true})}
+                    onClose={() => this.setState({ showDrawer: false })}
+                    onOpen={() => this.setState({ showDrawer: true })}
                 >
                     <div>
-                        <ListItem button key={'close'} onClick={() => this.setState({showDrawer: false})}>
-                            <ListItemIcon><ChatBubbleIcon/></ListItemIcon>
+                        <ListItem button key={'close'} onClick={() => this.setState({ showDrawer: false })}>
+                            <ListItemIcon><ChatBubbleIcon /></ListItemIcon>
                             <ListItemText primary={"ReviewsQR"} />
                             <ChevronLeftIcon />
                         </ListItem>
@@ -115,12 +116,16 @@ class Navbar extends React.Component {
                         {companies}
                         {this.renderAddButton()}
                     </List>
+
+
                 </SwipeableDrawer>
             </div>
         );
     }
 
-    componentWillMount () {
+
+
+    componentWillMount() {
         this.props.getCompanies();
 
         let activeCompanyId = query.parse(window.location.search).company;
@@ -136,10 +141,10 @@ class Navbar extends React.Component {
         });
     }
 
-    getCompanyIcon (img) {
+    getCompanyIcon(img) {
         switch (img) {
             case 'logo':
-                return <ChatBubbleIcon/>;
+                return <ChatBubbleIcon />;
 
             case 'user':
                 return <AccountCircle />;
@@ -152,19 +157,28 @@ class Navbar extends React.Component {
         }
     }
 
-    renderAddButton () { //FIXME add ADD icon
+
+
+    renderAddButton() { //FIXME add ADD icon
+
+
         switch (this.props.addButtonStatus) {
             case 0:
                 return (
                     <ListItem button key={'new'} onClick={() => this.props.setAddButtonStatus(1)}>
-                        <ListItemIcon><AddIcon/></ListItemIcon>
+                        <ListItemIcon><AddIcon /></ListItemIcon>
                         <ListItemText primary={"Create new"} />
+
+
+
+
                     </ListItem>
                 );
 
             case 1:
                 return (
-                    <ListItem button key={'new'}>
+                    <ListItem key={'new'} style={{ 'display': 'inline-block' }} >
+
                         <TextField
                             autoFocus
                             margin="dense"
@@ -173,19 +187,33 @@ class Navbar extends React.Component {
                             type="email"
                             fullWidth
                             value={this.state.newCompanyName}
-                            onChange={e => this.setState({newCompanyName: e.target.value})}
-                            onBlur={() => this.props.setAddButtonStatus(0)}
-                            onKeyDown={this.addNewCompany.bind(this)}
+                            onChange={e => this.setState({ newCompanyName: e.target.value })}
+                            onKeyDown={e => e.key === 'Enter' && this.addNewCompany()}
                             error={this.state.addCompanyError}
                             helperText={this.state.addCompanyError}
                         />
-                        <Button>Cancel</Button>
-                        <Button
-                            color="primary"
-                            variant="contained"
-                        >Create</Button>
-                    </ListItem>
+
+
+
+
+                        <div >
+                            <Button style={{ float: 'left',   }}
+                                variant="outlined"
+                                onClick={() => { this.props.setAddButtonStatus(0) }}> Cancel </Button>
+
+
+                            <Button style={{ 'margin-left': '15px' }}
+                                variant="contained"
+                                color="primary"
+                                onClick={this.addNewCompany}>Create</Button>
+                        </div>
+
+
+
+                    </ListItem >
+
                 );
+
 
             case -1:
                 return (
@@ -197,18 +225,24 @@ class Navbar extends React.Component {
         }
     }
 
-    addNewCompany (e) {
-        if (e.key !== 'Enter') return;
+
+
+
+
+    addNewCompany = (e) => {
+
 
         let name = this.state.newCompanyName;
         if (!name || !name.trim())
-            return this.setState({addCompanyError: "Name can't be empty"});
+            return this.setState({ addCompanyError: "Name can't be empty" });
 
         this.props.addCompany(name);
-        this.setState({newCompanyName: "New company", addCompanyError: ""});
+        this.setState({ newCompanyName: "New company", addCompanyError: "" });
     }
 
-    onChangeCompany (id) {
+
+    onChangeCompany(id) {
+
         this.props.setActiveCompanyId(id);
         if (this.props.onChangeCompany) this.props.onChangeCompany(id);
     }
