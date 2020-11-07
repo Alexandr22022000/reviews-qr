@@ -159,26 +159,19 @@ class Navbar extends React.Component {
 
 
 
-    renderAddButton() { //FIXME add ADD icon
-
-
+    renderAddButton() {
         switch (this.props.addButtonStatus) {
             case 0:
                 return (
                     <ListItem button key={'new'} onClick={() => this.props.setAddButtonStatus(1)}>
-                        <ListItemIcon><AddIcon /></ListItemIcon>
+                        <ListItemIcon><AddIcon/></ListItemIcon>
                         <ListItemText primary={"Create new"} />
-
-
-
-
                     </ListItem>
                 );
 
             case 1:
                 return (
                     <ListItem key={'new'} style={{ 'display': 'inline-block' }} >
-
                         <TextField
                             autoFocus
                             margin="dense"
@@ -193,25 +186,19 @@ class Navbar extends React.Component {
                             helperText={this.state.addCompanyError}
                         />
 
-
-
-
-                        <div >
-                            <Button style={{ float: 'left',   }}
+                        <div>
+                            <Button style={{ float: 'left' }}
                                 variant="outlined"
-                                onClick={() => { this.props.setAddButtonStatus(0) }}> Cancel </Button>
-
+                                onClick={() => {this.props.setAddButtonStatus(0)}}
+                            >Cancel</Button>
 
                             <Button style={{ 'margin-left': '15px' }}
                                 variant="contained"
                                 color="primary"
-                                onClick={this.addNewCompany}>Create</Button>
+                                onClick={this.addNewCompany}
+                            >Create</Button>
                         </div>
-
-
-
-                    </ListItem >
-
+                    </ListItem>
                 );
 
 
@@ -229,9 +216,7 @@ class Navbar extends React.Component {
 
 
 
-    addNewCompany = (e) => {
-
-
+    addNewCompany = () => {
         let name = this.state.newCompanyName;
         if (!name || !name.trim())
             return this.setState({ addCompanyError: "Name can't be empty" });
@@ -242,7 +227,6 @@ class Navbar extends React.Component {
 
 
     onChangeCompany(id) {
-
         this.props.setActiveCompanyId(id);
         if (this.props.onChangeCompany) this.props.onChangeCompany(id);
     }
