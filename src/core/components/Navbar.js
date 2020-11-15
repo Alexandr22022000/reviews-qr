@@ -40,7 +40,7 @@ class Navbar extends React.Component {
                     style={company.id === this.props.activeCompanyId ? { backgroundColor: '#b3b3b3' } : {}}
                     component={Link}
                     to={"/?company=" + company.id}
-                    onClick={() => this.onChangeCompany(company.id) || this.props.setAddButtonStatus(0)}
+                    onClick={() => this.onChangeCompany(company.id)}
                     button
                     key={company.id}
                 >
@@ -155,7 +155,7 @@ class Navbar extends React.Component {
 
 
 
-    renderAddButton() { //FIXME add ADD icon
+    renderAddButton() {
         switch (this.props.addButtonStatus) {
             case 0:
                 return (
@@ -168,7 +168,6 @@ class Navbar extends React.Component {
             case 1:
                 return (
                     <ListItem key={'new'} style={{ 'display': 'inline-block' }} >
-
                         <TextField
                             autoFocus
                             margin="dense"
@@ -183,14 +182,16 @@ class Navbar extends React.Component {
                             helperText={this.state.addCompanyError}
                         />
 
-                        <div >
-                            <Button style={{ float: 'right', 'margin-left': '8px' }}
+                        <div style={{ 'text-align': 'right' }}>
+                            <Button style={{ 'margin-right': '8px' }}
+                                onClick={() => { this.props.setAddButtonStatus(0) }}> Cancel
+                            </Button>
+
+                            <Button
                                 variant="contained"
                                 color="primary"
-                                onClick={this.addNewCompany}>Create</Button>
-
-                            <Button style={{ float: 'right' }}
-                                onClick={() => { this.props.setAddButtonStatus(0) }}> Cancel </Button>
+                                onClick={this.addNewCompany}>Create
+                            </Button>
                         </div>
                     </ListItem >
                 );
@@ -220,6 +221,7 @@ class Navbar extends React.Component {
 
         this.props.setActiveCompanyId(id);
         if (this.props.onChangeCompany) this.props.onChangeCompany(id);
+        return this.props.setAddButtonStatus(0);
     }
 }
 
