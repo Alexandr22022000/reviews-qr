@@ -25,6 +25,7 @@ import AddIcon from '@material-ui/icons/Add';
 import TextField from '@material-ui/core/TextField';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { Link } from "react-router-dom";
+import { positions } from '@material-ui/system';
 
 class Navbar extends React.Component {
     render() {
@@ -104,8 +105,8 @@ class Navbar extends React.Component {
                     onOpen={() => this.setState({ showDrawer: true })}
                 >
                     <div>
-                        <ListItem button key={'close'} onClick={() => this.setState({ showDrawer: false })} >
-                            <ListItemIcon  ><ChatBubbleIcon /></ListItemIcon>
+                        <ListItem button key={'close'} onClick={() => this.setState({ showDrawer: false })}>
+                            <ListItemIcon><ChatBubbleIcon /></ListItemIcon>
                             <ListItemText primary={"ReviewsQR"} />
                             <ChevronLeftIcon />
                         </ListItem>
@@ -115,12 +116,12 @@ class Navbar extends React.Component {
                         {companies}
                         {this.renderAddButton()}
                     </List>
+
+
                 </SwipeableDrawer>
             </div>
         );
     }
-
-
 
     componentWillMount() {
         this.props.getCompanies();
@@ -196,6 +197,7 @@ class Navbar extends React.Component {
                     </ListItem >
                 );
 
+
             case -1:
                 return (
                     <ListItem button key={'new'}>
@@ -218,7 +220,6 @@ class Navbar extends React.Component {
 
 
     onChangeCompany(id) {
-
         this.props.setActiveCompanyId(id);
         if (this.props.onChangeCompany) this.props.onChangeCompany(id);
         return this.props.setAddButtonStatus(0);
