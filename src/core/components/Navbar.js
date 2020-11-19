@@ -45,7 +45,7 @@ class Navbar extends React.Component {
                     button
                     key={company.id}
                 >
-                    <ListItemIcon>{this.getCompanyIcon(company.img)}</ListItemIcon>
+                    <ListItemIcon >{this.getCompanyIcon(company.img)}</ListItemIcon>
                     <ListItemText primary={company.name} />
                 </ListItem>
             ));
@@ -53,15 +53,15 @@ class Navbar extends React.Component {
         else {
             companies = [0, 1, 2].map(() => (
                 <ListItem button key={'new'}>
-                    <ListItemIcon><Skeleton variant="circle" width={30} height={30} /></ListItemIcon>
-                    <ListItemText><Skeleton variant="text" fullWidth /></ListItemText>
+                    <ListItemIcon ><Skeleton variant="circle" width={30} height={30} /></ListItemIcon>
+                    <ListItemText ><Skeleton variant="text" fullWidth /></ListItemText>
                 </ListItem>
             ));
         }
 
         return (
             <div>
-                <AppBar position="static">
+                <AppBar position="static" onClick={() => this.props.setAddButtonStatus(0)} >
                     <Toolbar>
                         <IconButton
                             edge="start"
@@ -123,11 +123,8 @@ class Navbar extends React.Component {
         );
     }
 
-
-
     componentWillMount() {
         this.props.getCompanies();
-
         let activeCompanyId = query.parse(window.location.search).company;
         if (window.location.pathname === "/" && !activeCompanyId) activeCompanyId = SEARCH.COMPANY_ALL;
         this.props.setActiveCompanyId(activeCompanyId);
@@ -164,7 +161,7 @@ class Navbar extends React.Component {
             case 0:
                 return (
                     <ListItem button key={'new'} onClick={() => this.props.setAddButtonStatus(1)}>
-                        <ListItemIcon><AddIcon/></ListItemIcon>
+                        <ListItemIcon><AddIcon /></ListItemIcon>
                         <ListItemText primary={"Create new"} />
                     </ListItem>
                 );
@@ -186,19 +183,18 @@ class Navbar extends React.Component {
                             helperText={this.state.addCompanyError}
                         />
 
-                        <div>
-                            <Button style={{ float: 'left' }}
-                                variant="outlined"
-                                onClick={() => {this.props.setAddButtonStatus(0)}}
-                            >Cancel</Button>
+                        <div style={{ 'text-align': 'right' }}>
+                            <Button style={{ 'margin-right': '8px' }}
+                                onClick={() => { this.props.setAddButtonStatus(0) }}> Cancel
+                            </Button>
 
-                            <Button style={{ 'margin-left': '15px' }}
+                            <Button
                                 variant="contained"
                                 color="primary"
-                                onClick={this.addNewCompany}
-                            >Create</Button>
+                                onClick={this.addNewCompany}>Create
+                            </Button>
                         </div>
-                    </ListItem>
+                    </ListItem >
                 );
 
 
@@ -213,10 +209,7 @@ class Navbar extends React.Component {
     }
 
 
-
-
-
-    addNewCompany = () => {
+    addNewCompany = (e) => {
         let name = this.state.newCompanyName;
         if (!name || !name.trim())
             return this.setState({ addCompanyError: "Name can't be empty" });
@@ -229,6 +222,7 @@ class Navbar extends React.Component {
     onChangeCompany(id) {
         this.props.setActiveCompanyId(id);
         if (this.props.onChangeCompany) this.props.onChangeCompany(id);
+        return this.props.setAddButtonStatus(0);
     }
 }
 
