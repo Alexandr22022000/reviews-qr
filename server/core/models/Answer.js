@@ -1,4 +1,4 @@
-const mongoose = require('mongoose'),
+const mongoose = require("mongoose"),
     Schema = mongoose.Schema;
 
 const answerSchema = mongoose.Schema({
@@ -6,13 +6,15 @@ const answerSchema = mongoose.Schema({
     customerId: String,
     customerIp: String,
     customerLocation: String,
-    answers: [{
-        id: Number,
-        value: String,
-    }],
+    answers: [
+        {
+            id: Number,
+            value: String,
+        },
+    ],
     createdAt: Date,
 });
 
-answerSchema.path('createdAt').default(() => new Date());
+answerSchema.path("createdAt").default(() => new Date());
 
-module.exports = mongoose.model('Answer', answerSchema);
+module.exports = mongoose.model("Answer", answerSchema);

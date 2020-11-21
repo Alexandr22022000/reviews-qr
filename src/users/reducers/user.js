@@ -1,4 +1,4 @@
-import ACTIONS from '../actions/types';
+import ACTIONS from "../actions/types";
 
 const defaultState = {
     name: null,
@@ -9,7 +9,7 @@ const defaultState = {
 const statuses = (state = defaultState, action) => {
     switch (action.type) {
         case ACTIONS.SET_USER:
-            return {...state, name: action.name, img: action.img, email: action.email};
+            return { ...state, name: action.name, img: action.img, email: action.email };
 
         default:
             return state;

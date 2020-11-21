@@ -1,67 +1,70 @@
-import React from 'react';
-import SEARCH from '../constants/search';
+import React from "react";
+import SEARCH from "../constants/search";
 import query from "query-string";
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuIcon from '@material-ui/icons/Menu';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import MenuIcon from "@material-ui/icons/Menu";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Button from "@material-ui/core/Button";
-import Divider from '@material-ui/core/Divider';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import BusinessIcon from '@material-ui/icons/Business';
-import ChatBubbleIcon from '@material-ui/icons/ChatBubble'; //FIXME add ReviewsQR logo and add Avatar component
-import ShareIcon from '@material-ui/icons/Share';
-import AddIcon from '@material-ui/icons/Add';
-import TextField from '@material-ui/core/TextField';
-import Skeleton from '@material-ui/lab/Skeleton';
+import Divider from "@material-ui/core/Divider";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import BusinessIcon from "@material-ui/icons/Business";
+import ChatBubbleIcon from "@material-ui/icons/ChatBubble"; //FIXME add ReviewsQR logo and add Avatar component
+import ShareIcon from "@material-ui/icons/Share";
+import AddIcon from "@material-ui/icons/Add";
+import TextField from "@material-ui/core/TextField";
+import Skeleton from "@material-ui/lab/Skeleton";
 import { Link } from "react-router-dom";
-import { positions } from '@material-ui/system';
+import { positions } from "@material-ui/system";
 
 class Navbar extends React.Component {
     render() {
         let companies = [];
         if (this.props.companies) {
-            companies.push({ name: "All", img: 'logo', id: SEARCH.COMPANY_ALL });
-            companies.push({ name: "Personal", img: 'user', id: SEARCH.COMPANY_MY });
-            companies.push({ name: "Shared", img: 'share', id: SEARCH.COMPANY_SHARED });
+            companies.push({ name: "All", img: "logo", id: SEARCH.COMPANY_ALL });
+            companies.push({ name: "Personal", img: "user", id: SEARCH.COMPANY_MY });
+            companies.push({ name: "Shared", img: "share", id: SEARCH.COMPANY_SHARED });
             companies = companies.concat(this.props.companies);
 
-            companies = companies.map(company => (
+            companies = companies.map((company) => (
                 <ListItem
-                    style={company.id === this.props.activeCompanyId ? { backgroundColor: '#b3b3b3' } : {}}
+                    style={company.id === this.props.activeCompanyId ? { backgroundColor: "#b3b3b3" } : {}}
                     component={Link}
                     to={"/?company=" + company.id}
                     onClick={() => this.onChangeCompany(company.id)}
                     button
                     key={company.id}
                 >
-                    <ListItemIcon >{this.getCompanyIcon(company.img)}</ListItemIcon>
+                    <ListItemIcon>{this.getCompanyIcon(company.img)}</ListItemIcon>
                     <ListItemText primary={company.name} />
                 </ListItem>
             ));
-        }
-        else {
+        } else {
             companies = [0, 1, 2].map(() => (
-                <ListItem button key={'new'}>
-                    <ListItemIcon ><Skeleton variant="circle" width={30} height={30} /></ListItemIcon>
-                    <ListItemText ><Skeleton variant="text" fullWidth /></ListItemText>
+                <ListItem button key={"new"}>
+                    <ListItemIcon>
+                        <Skeleton variant="circle" width={30} height={30} />
+                    </ListItemIcon>
+                    <ListItemText>
+                        <Skeleton variant="text" fullWidth />
+                    </ListItemText>
                 </ListItem>
             ));
         }
 
         return (
             <div>
-                <AppBar position="static" onClick={() => this.props.setAddButtonStatus(0)} >
+                <AppBar position="static" onClick={() => this.props.setAddButtonStatus(0)}>
                     <Toolbar>
                         <IconButton
                             edge="start"
@@ -72,8 +75,10 @@ class Navbar extends React.Component {
                             <MenuIcon />
                         </IconButton>
                         {this.props.logo}
-                        <Typography style={{ marginLeft: '10px' }} variant="h6">{this.props.name}</Typography>
-                        <Typography variant="h6" style={{ flexGrow: '1' }} />
+                        <Typography style={{ marginLeft: "10px" }} variant="h6">
+                            {this.props.name}
+                        </Typography>
+                        <Typography variant="h6" style={{ flexGrow: "1" }} />
                         {this.props.children}
                         <IconButton
                             aria-label="account of current user"
@@ -85,15 +90,17 @@ class Navbar extends React.Component {
                             <AccountCircle />
                         </IconButton>
                         <Menu
-                            anchorEl={'primary-search-account-menu'}
-                            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                            anchorEl={"primary-search-account-menu"}
+                            anchorOrigin={{ vertical: "top", horizontal: "right" }}
                             id={1}
                             keepMounted
-                            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                            transformOrigin={{ vertical: "top", horizontal: "right" }}
                             open={this.state.showAccountMenu}
                             onClose={() => this.setState({ showAccountMenu: false })}
                         >
-                            <MenuItem component={Link} to={"/profile"}>Profile</MenuItem>
+                            <MenuItem component={Link} to={"/profile"}>
+                                Profile
+                            </MenuItem>
                             <MenuItem onClick={this.props.logout.bind(this)}>Logout</MenuItem>
                         </Menu>
                     </Toolbar>
@@ -105,8 +112,10 @@ class Navbar extends React.Component {
                     onOpen={() => this.setState({ showDrawer: true })}
                 >
                     <div>
-                        <ListItem button key={'close'} onClick={() => this.setState({ showDrawer: false })}>
-                            <ListItemIcon><ChatBubbleIcon /></ListItemIcon>
+                        <ListItem button key={"close"} onClick={() => this.setState({ showDrawer: false })}>
+                            <ListItemIcon>
+                                <ChatBubbleIcon />
+                            </ListItemIcon>
                             <ListItemText primary={"ReviewsQR"} />
                             <ChevronLeftIcon />
                         </ListItem>
@@ -116,8 +125,6 @@ class Navbar extends React.Component {
                         {companies}
                         {this.renderAddButton()}
                     </List>
-
-
                 </SwipeableDrawer>
             </div>
         );
@@ -140,13 +147,13 @@ class Navbar extends React.Component {
 
     getCompanyIcon(img) {
         switch (img) {
-            case 'logo':
+            case "logo":
                 return <ChatBubbleIcon />;
 
-            case 'user':
+            case "user":
                 return <AccountCircle />;
 
-            case 'share':
+            case "share":
                 return <ShareIcon />;
 
             default:
@@ -154,21 +161,21 @@ class Navbar extends React.Component {
         }
     }
 
-
-
     renderAddButton() {
         switch (this.props.addButtonStatus) {
             case 0:
                 return (
-                    <ListItem button key={'new'} onClick={() => this.props.setAddButtonStatus(1)}>
-                        <ListItemIcon><AddIcon /></ListItemIcon>
+                    <ListItem button key={"new"} onClick={() => this.props.setAddButtonStatus(1)}>
+                        <ListItemIcon>
+                            <AddIcon />
+                        </ListItemIcon>
                         <ListItemText primary={"Create new"} />
                     </ListItem>
                 );
 
             case 1:
                 return (
-                    <ListItem key={'new'} style={{ 'display': 'inline-block' }} >
+                    <ListItem key={"new"} style={{ display: "inline-block" }}>
                         <TextField
                             autoFocus
                             margin="dense"
@@ -177,47 +184,51 @@ class Navbar extends React.Component {
                             type="email"
                             fullWidth
                             value={this.state.newCompanyName}
-                            onChange={e => this.setState({ newCompanyName: e.target.value })}
-                            onKeyDown={e => e.key === 'Enter' && this.addNewCompany()}
+                            onChange={(e) => this.setState({ newCompanyName: e.target.value })}
+                            onKeyDown={(e) => e.key === "Enter" && this.addNewCompany()}
                             error={this.state.addCompanyError}
                             helperText={this.state.addCompanyError}
                         />
 
-                        <div style={{ 'text-align': 'right' }}>
-                            <Button style={{ 'margin-right': '8px' }}
-                                onClick={() => { this.props.setAddButtonStatus(0) }}> Cancel
+                        <div style={{ "text-align": "right" }}>
+                            <Button
+                                style={{ "margin-right": "8px" }}
+                                onClick={() => {
+                                    this.props.setAddButtonStatus(0);
+                                }}
+                            >
+                                {" "}
+                                Cancel
                             </Button>
 
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={this.addNewCompany}>Create
+                            <Button variant="contained" color="primary" onClick={this.addNewCompany}>
+                                Create
                             </Button>
                         </div>
-                    </ListItem >
+                    </ListItem>
                 );
-
 
             case -1:
                 return (
-                    <ListItem button key={'new'}>
-                        <ListItemIcon><Skeleton variant="circle" width={30} height={30} /></ListItemIcon>
-                        <ListItemText><Skeleton variant="text" fullWidth /></ListItemText>
+                    <ListItem button key={"new"}>
+                        <ListItemIcon>
+                            <Skeleton variant="circle" width={30} height={30} />
+                        </ListItemIcon>
+                        <ListItemText>
+                            <Skeleton variant="text" fullWidth />
+                        </ListItemText>
                     </ListItem>
                 );
         }
     }
 
-
     addNewCompany = (e) => {
         let name = this.state.newCompanyName;
-        if (!name || !name.trim())
-            return this.setState({ addCompanyError: "Name can't be empty" });
+        if (!name || !name.trim()) return this.setState({ addCompanyError: "Name can't be empty" });
 
         this.props.addCompany(name);
         this.setState({ newCompanyName: "New company", addCompanyError: "" });
-    }
-
+    };
 
     onChangeCompany(id) {
         this.props.setActiveCompanyId(id);

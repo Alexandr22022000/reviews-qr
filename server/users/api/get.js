@@ -1,7 +1,7 @@
-const UserModel = require('../../core/models/User');
+const UserModel = require("../../core/models/User");
 
 module.exports = (req, res) => {
-    UserModel.findOne({_id: req.session.user_id}, (err, User) => {
+    UserModel.findOne({ _id: req.session.user_id }, (err, User) => {
         if (err || !User)
             return res.status(500).send({
                 message: "Error: user not found",

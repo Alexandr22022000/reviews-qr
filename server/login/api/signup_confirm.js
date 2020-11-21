@@ -1,21 +1,21 @@
-const UserModel = require('../../core/models/User'),
-    IntentModel = require('../../core/models/Intent'),
-    {consoleLog} = require('../../core/logs'),
-    IMAGES = require('../../core/constants/images'),
-    INTENT = require('../../core/constants/intent_types');
+const UserModel = require("../../core/models/User"),
+    IntentModel = require("../../core/models/Intent"),
+    { consoleLog } = require("../../core/logs"),
+    IMAGES = require("../../core/constants/images"),
+    INTENT = require("../../core/constants/intent_types");
 
 module.exports = (req, res) => {
-    let {token} = req.body;
+    let { token } = req.body;
 
     if (!token || !token.trim())
         return res.status(400).send({
-            message: "Error: token can't be empty"
+            message: "Error: token can't be empty",
         });
 
-    IntentModel.findOne({token, type: INTENT.CREATE_USER}, (err, Intent) => {
+    IntentModel.findOne({ token, type: INTENT.CREATE_USER }, (err, Intent) => {
         if (err || !Intent)
             return res.status(200).send({
-                message: "Your email token is outdated! Please get new email token"
+                message: "Your email token is outdated! Please get new email token",
             });
 
         const User = new UserModel({
@@ -25,18 +25,18 @@ module.exports = (req, res) => {
             img: IMAGES.USER_DEFAULT,
         });
 
-        Intent.remove(err => {
+        Intent.remove((err) => {
             if (err)
                 return res.status(500).send({
-                    message: "Error: can't remove intent"
+                    message: "Error: can't remove intent",
                 });
 
-            User.save(err => {
+            User.save((err) => {
                 if (err) {
                     consoleLog("Can't save user! Error:");
                     consoleLog(err);
                     return res.status(500).send({
-                        message: "Error: can't save user"
+                        message: "Error: can't save user",
                     });
                 }
 

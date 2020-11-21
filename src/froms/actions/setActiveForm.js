@@ -1,4 +1,4 @@
-import ACTIONS from './types';
+import ACTIONS from "./types";
 
 const action = (form) => ({
     type: ACTIONS.SET_ACTIVE_FORM,

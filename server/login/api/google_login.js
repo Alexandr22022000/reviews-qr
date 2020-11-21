@@ -1,14 +1,14 @@
-const UserModel = require('../../core/models/User');
+const UserModel = require("../../core/models/User");
 
 module.exports = (req, res) => {
-    const {token, name, email, img} = req.body;
+    const { token, name, email, img } = req.body;
 
     if (!email || !email.trim() || !name || !name.trim() || !token || !token.trim())
         return res.status(400).send({
-            message: "Error: token, email or name can't be empty"
+            message: "Error: token, email or name can't be empty",
         });
 
-    UserModel.findOne({email}, (err, User) => {
+    UserModel.findOne({ email }, (err, User) => {
         if (!err && User) {
             if (User.googleToken === token) {
                 req.session.user_id = User._id;

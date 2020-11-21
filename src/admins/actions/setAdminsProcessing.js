@@ -1,4 +1,4 @@
-import ACTIONS from './types';
+import ACTIONS from "./types";
 
 const action = (processingStatus) => ({
     type: ACTIONS.SET_ADMINS_PROCESSING,

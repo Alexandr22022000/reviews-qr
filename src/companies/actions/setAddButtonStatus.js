@@ -1,4 +1,4 @@
-import ACTIONS from './types';
+import ACTIONS from "./types";
 
 const action = (status) => ({
     type: ACTIONS.SET_ADD_BUTTON_STATUS,

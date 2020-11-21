@@ -1,14 +1,14 @@
-import axios from 'axios';
-import requestError from '../actions/requestError';
+import axios from "axios";
+import requestError from "../actions/requestError";
 
-import getCleanUrl from './getCleanUrl';
+import getCleanUrl from "./getCleanUrl";
 
 const HTTP = axios.create({
     baseURL: getCleanUrl(),
-    withCredentials: true
+    withCredentials: true,
 });
 
-const onError = (errors, dispatch) => error => {
+const onError = (errors, dispatch) => (error) => {
     let code = error.message.match(/([0-9][0-9][0-9])$/);
     if (!code || !code[0]) return dispatch(requestError("Network error!"));
     code = +code[0];
@@ -29,7 +29,7 @@ const onError = (errors, dispatch) => error => {
             break;
 
         case 401:
-            window.location.href = getCleanUrl() + '/login';
+            window.location.href = getCleanUrl() + "/login";
             break;
 
         default:
@@ -38,20 +38,20 @@ const onError = (errors, dispatch) => error => {
 };
 
 const get = (route, params, dispatch, errors) => {
-    return new Promise(resolve => {
-        HTTP.get(route, {params})
+    return new Promise((resolve) => {
+        HTTP.get(route, { params })
             .then((res) => resolve(res.data))
             .catch(onError(errors, dispatch));
     });
 };
 
 const post = (route, data, dispatch, errors) => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         HTTP.post(route, data)
             .then((res) => resolve(res.data))
             .catch(onError(errors, dispatch));
     });
 };
 
-const HTTPS = {get, post};
+const HTTPS = { get, post };
 export default HTTPS;

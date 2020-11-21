@@ -1,9 +1,9 @@
-const mailer = require('../../core/mailer');
+const mailer = require("../../core/mailer");
 
-const DOMAIN = process.env.DOMAIN || 'http://localhost:3000';
+const DOMAIN = process.env.DOMAIN || "http://localhost:3000";
 
 module.exports = (email, name, token) => {
-    let url = DOMAIN + '/signup_confirm?token=' + token;
+    let url = DOMAIN + "/signup_confirm?token=" + token;
 
     const msg = `
         Hello, ${name}!
@@ -15,6 +15,6 @@ module.exports = (email, name, token) => {
     return mailer({
         to: email,
         subject: "ReviewsSQ account registration",
-        html: msg
+        html: msg,
     });
 };

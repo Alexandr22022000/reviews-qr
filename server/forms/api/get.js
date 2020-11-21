@@ -1,8 +1,8 @@
-const User = require('../../core/models/User'),
-    getFormById = require('../getFormById');
+const User = require("../../core/models/User"),
+    getFormById = require("../getFormById");
 
 module.exports = (req, res) => {
-    const {id} = req.query;
+    const { id } = req.query;
 
     if (!id || !id.trim())
         return res.status(400).send({
@@ -10,10 +10,9 @@ module.exports = (req, res) => {
         });
 
     getFormById(id, req.session.user_id)
-        .then(({form, companies}) => {
-
+        .then(({ form, companies }) => {
             let mainObj = form;
-            companies.forEach(company => {
+            companies.forEach((company) => {
                 if (company._id === form.creatorId) {
                     mainObj = company;
                 }
@@ -21,14 +20,14 @@ module.exports = (req, res) => {
 
             let admins = mainObj.admins;
             admins.push(mainObj.creatorId);
-            admins = admins.map(admin => ({_id: admin}));
-            User.find({$or: admins}, (err, users) => {
+            admins = admins.map((admin) => ({ _id: admin }));
+            User.find({ $or: admins }, (err, users) => {
                 if (err || !users)
                     return res.status(404).send({
                         message: "Error: admins not found",
                     });
 
-                users = users.map(User => ({
+                users = users.map((User) => ({
                     id: User._id,
                     name: User.name,
                     img: User.img,
@@ -48,7 +47,7 @@ module.exports = (req, res) => {
                 });
             });
         })
-        .catch(e => {
+        .catch((e) => {
             res.status(404).send({
                 message: e,
             });

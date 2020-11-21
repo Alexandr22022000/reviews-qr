@@ -1,4 +1,4 @@
-const mongoose = require('mongoose'),
+const mongoose = require("mongoose"),
     Schema = mongoose.Schema;
 
 const formSchema = mongoose.Schema({
@@ -6,16 +6,18 @@ const formSchema = mongoose.Schema({
     img: String,
     creatorId: Schema.ObjectId,
     admins: [Schema.ObjectId],
-    questions: [{
-        id: Number,
-        type: String,
-        options: [String],
-        rangeStart: Number,
-        rangeEnd: Number,
-        title: String,
-        description: String,
-        isDeleted: Boolean,
-    }],
+    questions: [
+        {
+            id: Number,
+            type: String,
+            options: [String],
+            rangeStart: Number,
+            rangeEnd: Number,
+            title: String,
+            description: String,
+            isDeleted: Boolean,
+        },
+    ],
     style: {
         colorBackground: String,
         colorBackground2: String,
@@ -34,7 +36,7 @@ const formSchema = mongoose.Schema({
     isDeleted: Boolean,
 });
 
-formSchema.path('createdAt').default(() => new Date());
-formSchema.path('isDeleted').default(() => false);
+formSchema.path("createdAt").default(() => new Date());
+formSchema.path("isDeleted").default(() => false);
 
-module.exports = mongoose.model('Form', formSchema);
+module.exports = mongoose.model("Form", formSchema);

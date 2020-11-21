@@ -1,5 +1,5 @@
-import ACTIONS from '../actions/types';
-import SEARCH from '../../core/constants/search';
+import ACTIONS from "../actions/types";
+import SEARCH from "../../core/constants/search";
 
 const defaultState = {
     companies: null,
@@ -11,16 +11,16 @@ const defaultState = {
 const statuses = (state = defaultState, action) => {
     switch (action.type) {
         case ACTIONS.SET_COMPANIES:
-            return {...state, companies: action.companies};
+            return { ...state, companies: action.companies };
 
         case ACTIONS.SET_ACTIVE_COMPANY_ID:
-            return {...state, activeCompanyId: action.id};
+            return { ...state, activeCompanyId: action.id };
 
         case ACTIONS.SET_ACTIVE_COMPANY:
-            return {...state, activeCompany: action.company};
+            return { ...state, activeCompany: action.company };
 
         case ACTIONS.SET_ADD_BUTTON_STATUS:
-            return {...state, addButtonStatus: action.status};
+            return { ...state, addButtonStatus: action.status };
 
         default:
             return state;

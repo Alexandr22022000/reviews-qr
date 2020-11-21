@@ -1,7 +1,7 @@
-const getFormById = require('../getFormById');
+const getFormById = require("../getFormById");
 
 module.exports = (req, res) => {
-    const {id} = req.body;
+    const { id } = req.body;
 
     if (!id || !id.trim())
         return res.status(400).send({
@@ -9,10 +9,10 @@ module.exports = (req, res) => {
         });
 
     getFormById(id, req.session.user_id, true)
-        .then(({form}) => {
+        .then(({ form }) => {
             form.isDeleted = false;
 
-            form.save(err => {
+            form.save((err) => {
                 if (err)
                     return res.status(500).send({
                         message: "Error: can't save form",
@@ -21,7 +21,7 @@ module.exports = (req, res) => {
                 res.status(200).send({});
             });
         })
-        .catch(e => {
+        .catch((e) => {
             res.status(404).send({
                 message: e,
             });

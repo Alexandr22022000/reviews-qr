@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
     email: String,
@@ -10,6 +10,6 @@ const userSchema = mongoose.Schema({
     isDeleted: Boolean,
 });
 
-userSchema.path('createdAt').default(() => new Date());
+userSchema.path("createdAt").default(() => new Date());
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);

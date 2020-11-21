@@ -1,15 +1,15 @@
-const Answer = require('../../core/models/Answer'),
-    Code = require('../../core/models/Code');
+const Answer = require("../../core/models/Answer"),
+    Code = require("../../core/models/Code");
 
 module.exports = (req, res) => {
-    const {link, answers, customer_id} = req.body;
+    const { link, answers, customer_id } = req.body;
 
     if (!link || !link.trim())
         return res.status(400).send({
             message: "Error: id can't be empty",
         });
 
-    Code.findOne({link}, (err, code) => {
+    Code.findOne({ link }, (err, code) => {
         if (err || !code)
             return res.status(404).send({
                 message: "Error: code not found",
@@ -22,7 +22,7 @@ module.exports = (req, res) => {
             answers,
         });
 
-        answer.save(err => {
+        answer.save((err) => {
             if (err)
                 return res.status(500).send({
                     message: "Error: can't save answer",

@@ -1,5 +1,5 @@
-import ACTIONS from '../actions/types';
-import SEARCH from '../../core/constants/search'
+import ACTIONS from "../actions/types";
+import SEARCH from "../../core/constants/search";
 
 const defaultState = {
     forms: null,
@@ -12,16 +12,16 @@ const defaultState = {
 const statuses = (state = defaultState, action) => {
     switch (action.type) {
         case ACTIONS.SET_FORMS:
-            return {...state, forms: action.forms};
+            return { ...state, forms: action.forms };
 
         case ACTIONS.SET_ACTIVE_FORM:
-            return {...state, activeForm: action.form, questions: action.form.questions};
+            return { ...state, activeForm: action.form, questions: action.form.questions };
 
         case ACTIONS.SET_ACTIVE_FORM_ID:
-            return {...state, activeFormId: action.id};
+            return { ...state, activeFormId: action.id };
 
         case ACTIONS.SET_SEARCH_TYPE:
-            return {...state, searchType: action.searchType};
+            return { ...state, searchType: action.searchType };
 
         default:
             return state;

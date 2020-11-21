@@ -1,22 +1,22 @@
-import React from 'react';
-import {Redirect} from 'react-router-dom';
-import Preloader from '../../core/components/Preloader';
+import React from "react";
+import { Redirect } from "react-router-dom";
+import Preloader from "../../core/components/Preloader";
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 
 class CreateForm extends React.Component {
-    render () {
-        if (this.props.formId) return <Redirect to={`/form?id=${this.props.formId}&company=${this.props.companyId}`}/>;
-        if (this.state.processing) return <Preloader/>;
+    render() {
+        if (this.props.formId) return <Redirect to={`/form?id=${this.props.formId}&company=${this.props.companyId}`} />;
+        if (this.state.processing) return <Preloader />;
 
         return (
             <Dialog open={this.props.open} onClose={this.props.onClose} aria-labelledby="form-dialog-title">
@@ -27,26 +27,24 @@ class CreateForm extends React.Component {
                         margin="dense"
                         label="Name"
                         fullWidth
-                        style={{marginBottom: '30px'}}
+                        style={{ marginBottom: "30px" }}
                         error={this.state.errorName}
                         helperText={this.state.errorName}
-                        onChange={e => this.updateInput(e.target.value, 'name')}
+                        onChange={(e) => this.updateInput(e.target.value, "name")}
                         value={this.state.name}
                     />
                     <FormControl fullWidth>
                         <InputLabel>Template</InputLabel>
                         <Select
                             value={this.state.template}
-                            onChange={e => this.updateInput(e.target.value, 'template')}
+                            onChange={(e) => this.updateInput(e.target.value, "template")}
                         >
                             <MenuItem value={-1}>Empty</MenuItem>
                         </Select>
                     </FormControl>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={this.props.onClose}>
-                        Cancel
-                    </Button>
+                    <Button onClick={this.props.onClose}>Cancel</Button>
                     <Button onClick={this.create.bind(this)} color="primary" variant="contained">
                         Create
                     </Button>
@@ -55,18 +53,18 @@ class CreateForm extends React.Component {
         );
     }
 
-    componentWillMount () {
+    componentWillMount() {
         this.setState({
-            name: 'New form',
+            name: "New form",
             template: -1,
-            errorName: '',
+            errorName: "",
             processing: false,
         });
         this.props.setActiveFormId(null);
     }
 
-    updateInput (value, key) {
-        let errorName = (key === 'name' && (!value || !value.trim())) ? "Name can't be empty" : '';
+    updateInput(value, key) {
+        let errorName = key === "name" && (!value || !value.trim()) ? "Name can't be empty" : "";
 
         this.setState({
             [key]: value,
@@ -74,12 +72,11 @@ class CreateForm extends React.Component {
         });
     }
 
-    create () {
+    create() {
         const name = this.state.name;
-        if (!name || !name.trim())
-            return this.setState({errorName: "Name can't be empty"});
+        if (!name || !name.trim()) return this.setState({ errorName: "Name can't be empty" });
 
-        this.setState({processing: true});
+        this.setState({ processing: true });
         this.props.addForm(name);
     }
 }

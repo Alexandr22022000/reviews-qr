@@ -1,7 +1,7 @@
-import SignUp from '../components/SignUp';
-import {connect} from 'react-redux';
-import addError from '../actions/addError';
-import signup from '../async_actions/signup';
+import SignUp from "../components/SignUp";
+import { connect } from "react-redux";
+import addError from "../actions/addError";
+import signup from "../async_actions/signup";
 
 const mapStateToProps = (state) => ({
     checkEmail: state.login.checkEmail,
@@ -10,7 +10,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     addError,
-    signup
+    signup,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

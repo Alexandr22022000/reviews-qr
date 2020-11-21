@@ -1,7 +1,7 @@
-import RestorePasswordRequest from '../components/RestorePasswordRequest';
-import {connect} from 'react-redux';
-import addError from '../actions/addError';
-import restorePasswordRequest from '../async_actions/restorePasswordRequest';
+import RestorePasswordRequest from "../components/RestorePasswordRequest";
+import { connect } from "react-redux";
+import addError from "../actions/addError";
+import restorePasswordRequest from "../async_actions/restorePasswordRequest";
 
 const mapStateToProps = (state) => ({
     checkEmail: state.login.checkEmail,
@@ -10,7 +10,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     addError,
-    restorePasswordRequest
+    restorePasswordRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RestorePasswordRequest);

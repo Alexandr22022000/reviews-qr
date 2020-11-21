@@ -1,8 +1,8 @@
-const Code = require('../../core/models/Code'),
-    getFormById = require('../../forms/getFormById');
+const Code = require("../../core/models/Code"),
+    getFormById = require("../../forms/getFormById");
 
 module.exports = (req, res) => {
-    const {form_id} = req.query;
+    const { form_id } = req.query;
 
     if (!form_id || !form_id.trim())
         return res.status(400).send({
@@ -10,14 +10,14 @@ module.exports = (req, res) => {
         });
 
     getFormById(form_id, req.session.user_id)
-        .then(form => {
-            Code.find({formId: form_id}, (err, codes) => {
+        .then((form) => {
+            Code.find({ formId: form_id }, (err, codes) => {
                 if (err || !codes)
                     return res.status(404).send({
                         message: "Error: codes not found",
                     });
 
-                codes = codes.map(code => ({
+                codes = codes.map((code) => ({
                     id: code._id,
                     name: code.name,
                     img: code.img,
@@ -29,7 +29,7 @@ module.exports = (req, res) => {
                 });
             });
         })
-        .catch(e => {
+        .catch((e) => {
             res.status(404).send({
                 message: e,
             });
