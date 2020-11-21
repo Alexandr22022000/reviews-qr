@@ -1,4 +1,4 @@
-import ACTIONS from '../actions/types';
+import ACTIONS from "../actions/types";
 
 const defaultState = {
     login_errors: {
@@ -33,15 +33,14 @@ const statuses = (state = defaultState, action) => {
             const form = state[action.form + "_errors"];
             if (!action.field) {
                 for (let key in form) form[key] = action.msg;
-            }
-            else {
+            } else {
                 form[action.field] = action.msg;
             }
 
-            return {...state, [action.form + "_errors"]: {...form}};
+            return { ...state, [action.form + "_errors"]: { ...form } };
 
         case ACTIONS.SET_CHECK_EMAIL:
-            return {...state, checkEmail: true};
+            return { ...state, checkEmail: true };
 
         default:
             return state;

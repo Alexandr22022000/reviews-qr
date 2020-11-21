@@ -1,4 +1,4 @@
-const mailer = require('../../core/mailer');
+const mailer = require("../../core/mailer");
 
 module.exports = (email, formName, name) => {
     const msg = `
@@ -10,6 +10,6 @@ module.exports = (email, formName, name) => {
     return mailer({
         to: email,
         subject: "ReviewsSQ form rejection",
-        html: msg
+        html: msg,
     });
 };

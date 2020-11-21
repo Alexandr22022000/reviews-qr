@@ -1,41 +1,41 @@
-const Code = require('../../core/models/Code'),
-    Answer = require('../../core/models/Answer'),
-    getFormById = require('../../forms/getFormById'),
-    SORT_TYPES = require('../../core/constants/sort_types');
+const Code = require("../../core/models/Code"),
+    Answer = require("../../core/models/Answer"),
+    getFormById = require("../../forms/getFormById"),
+    SORT_TYPES = require("../../core/constants/sort_types");
 
 module.exports = (req, res) => {
-    let {id, type, date_start, date_end, show_deleted, sort_by} = req.query;
+    let { id, type, date_start, date_end, show_deleted, sort_by } = req.query;
 
     if (!id || !id.trim())
         return res.status(400).send({
             message: "Error: id can't be empty",
         });
 
-    Code.findOne({_id: id}, (err, code) => {
+    Code.findOne({ _id: id }, (err, code) => {
         if (err || !code)
             return res.status(404).send({
                 message: "Error: code not found",
             });
 
         getFormById(code.formId, req.session.user_id)
-            .then(form => {
-                const filter = {$and: [{codeId: code._id}]};
+            .then((form) => {
+                const filter = { $and: [{ codeId: code._id }] };
                 if (date_start) {
                     try {
                         date_start = new Date(date_start);
-                        filter.$and.push({createdAt: {$gt: date_start}});
+                        filter.$and.push({ createdAt: { $gt: date_start } });
                     } catch (e) {}
                 }
 
                 if (date_end) {
                     try {
                         date_end = new Date(date_end);
-                        filter.$and.push({createdAt: {$lt: date_end}});
+                        filter.$and.push({ createdAt: { $lt: date_end } });
                     } catch (e) {}
                 }
 
                 Answer.find(filter, (err, answers) => {
-                    if (err || ! answers)
+                    if (err || !answers)
                         return res.status(404).send({
                             message: "Error: answers not found",
                         });
@@ -57,7 +57,7 @@ module.exports = (req, res) => {
                     });
                 });
             })
-            .catch(e => {
+            .catch((e) => {
                 res.status(404).send({
                     message: e,
                 });
@@ -66,11 +66,10 @@ module.exports = (req, res) => {
 };
 
 const usersView = (users, questions, sort_by) => {
-    users = users.map(user => {
-        const answers = user.answers.map(answer => {
+    users = users.map((user) => {
+        const answers = user.answers.map((answer) => {
             for (let key in questions) {
-                if (questions[key].id === answer.id)
-                    return {question: questions[key], value: answer.value};
+                if (questions[key].id === answer.id) return { question: questions[key], value: answer.value };
             }
         });
 
@@ -85,29 +84,28 @@ const usersView = (users, questions, sort_by) => {
 
     switch (sort_by) {
         case SORT_TYPES.BY_USERS:
-            users = users.sort((a, b) => a.id > b.id ? -1 : (a.id === b.id ? 0 : 1));
+            users = users.sort((a, b) => (a.id > b.id ? -1 : a.id === b.id ? 0 : 1));
             break;
 
         case SORT_TYPES.BY_DATES:
         default:
-            users = users.sort((a, b) => a.date > b.date ? -1 : (a.date === b.date ? 0 : 1));
+            users = users.sort((a, b) => (a.date > b.date ? -1 : a.date === b.date ? 0 : 1));
     }
 
     return users;
 };
 
 const questionsView = (users, questions, showDeleted) => {
-    if (!showDeleted) questions = questions.filter(question => !question.isDeleted);
+    if (!showDeleted) questions = questions.filter((question) => !question.isDeleted);
 
-    questions = questions.map(question => {
-        const answers = users.map(user => {
+    questions = questions.map((question) => {
+        const answers = users.map((user) => {
             for (let key in user.answers) {
-                if (user.answers[key].id === question.id)
-                    return user.answers[key].value;
+                if (user.answers[key].id === question.id) return user.answers[key].value;
             }
         });
 
-        return {answers, question};
+        return { answers, question };
     });
 
     return questions;

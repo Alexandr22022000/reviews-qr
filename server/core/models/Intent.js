@@ -1,6 +1,6 @@
-const mongoose = require('mongoose'),
+const mongoose = require("mongoose"),
     Schema = mongoose.Schema,
-    crypto = require('crypto');
+    crypto = require("crypto");
 
 const IntentSchema = Schema({
     type: String,
@@ -13,8 +13,8 @@ const IntentSchema = Schema({
     userId: Schema.ObjectId,
 });
 
-IntentSchema.path('createdAt').default(() => new Date());
+IntentSchema.path("createdAt").default(() => new Date());
 
-IntentSchema.path('token').default(() => crypto.randomBytes(8).toString('hex'));
+IntentSchema.path("token").default(() => crypto.randomBytes(8).toString("hex"));
 
-module.exports = mongoose.model('Intent', IntentSchema);
+module.exports = mongoose.model("Intent", IntentSchema);

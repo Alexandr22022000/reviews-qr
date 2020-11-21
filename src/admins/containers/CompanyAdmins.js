@@ -1,8 +1,8 @@
-import Admins from '../components/Admins';
-import {connect} from 'react-redux';
-import invite from '../async-actions/inviteAdminToCompany';
-import reject from '../async-actions/rejectCompanyAdmin';
-import setAdminsProcessing from '../actions/setAdminsProcessing';
+import Admins from "../components/Admins";
+import { connect } from "react-redux";
+import invite from "../async-actions/inviteAdminToCompany";
+import reject from "../async-actions/rejectCompanyAdmin";
+import setAdminsProcessing from "../actions/setAdminsProcessing";
 
 const mapStateToProps = (state) => ({
     object: state.companies.activeCompany,

@@ -1,4 +1,4 @@
-import ACTIONS from './types';
+import ACTIONS from "./types";
 
 const action = () => ({
     type: ACTIONS.SET_CHECK_EMAIL,

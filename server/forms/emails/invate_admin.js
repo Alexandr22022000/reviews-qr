@@ -1,9 +1,9 @@
-const mailer = require('../../core/mailer');
+const mailer = require("../../core/mailer");
 
-const DOMAIN = process.env.DOMAIN || 'http://localhost:3000';
+const DOMAIN = process.env.DOMAIN || "http://localhost:3000";
 
 module.exports = (email, formName, name, token) => {
-    let url = DOMAIN + '/email/form-admin?token=' + token;
+    let url = DOMAIN + "/email/form-admin?token=" + token;
 
     const msg = `
         Hello!
@@ -15,6 +15,6 @@ module.exports = (email, formName, name, token) => {
     return mailer({
         to: email,
         subject: "ReviewsSQ form invitation",
-        html: msg
+        html: msg,
     });
 };

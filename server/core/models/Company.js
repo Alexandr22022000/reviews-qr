@@ -1,4 +1,4 @@
-const mongoose = require('mongoose'),
+const mongoose = require("mongoose"),
     Schema = mongoose.Schema;
 
 const companySchema = mongoose.Schema({
@@ -11,7 +11,7 @@ const companySchema = mongoose.Schema({
     isDeleted: Boolean,
 });
 
-companySchema.path('createdAt').default(() => new Date());
-companySchema.path('isDeleted').default(() => false);
+companySchema.path("createdAt").default(() => new Date());
+companySchema.path("isDeleted").default(() => false);
 
-module.exports = mongoose.model('Company', companySchema);
+module.exports = mongoose.model("Company", companySchema);

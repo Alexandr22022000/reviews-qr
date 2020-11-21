@@ -1,7 +1,7 @@
-import CreateForm from '../components/CreateForm';
-import {connect} from 'react-redux';
-import addForm from '../async-actions/addForm';
-import setActiveFormId from '../actions/setActiveFormId';
+import CreateForm from "../components/CreateForm";
+import { connect } from "react-redux";
+import addForm from "../async-actions/addForm";
+import setActiveFormId from "../actions/setActiveFormId";
 
 const mapStateToProps = (state) => ({
     formId: state.forms.activeFormId,

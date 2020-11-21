@@ -1,7 +1,7 @@
-import DeleteRestoreForm from '../components/DeleteRestoreForm';
-import {connect} from 'react-redux';
-import delForm from '../async-actions/delForm';
-import restoreForm from '../async-actions/restoreForm';
+import DeleteRestoreForm from "../components/DeleteRestoreForm";
+import { connect } from "react-redux";
+import delForm from "../async-actions/delForm";
+import restoreForm from "../async-actions/restoreForm";
 
 const mapStateToProps = (state) => ({});
 

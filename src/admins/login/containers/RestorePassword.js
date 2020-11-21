@@ -1,7 +1,7 @@
-import RestorePassword from '../components/RestorePassword';
-import {connect} from 'react-redux';
-import addError from '../actions/addError';
-import restorePassword from '../async_actions/restorePassword';
+import RestorePassword from "../components/RestorePassword";
+import { connect } from "react-redux";
+import addError from "../actions/addError";
+import restorePassword from "../async_actions/restorePassword";
 
 const mapStateToProps = (state) => ({
     user_name: state.user.name,

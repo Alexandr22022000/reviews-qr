@@ -1,14 +1,14 @@
-const Code = require('../../core/models/Code'),
-    Company = require('../../core/models/Company'),
-    Form = require('../../core/models/Form'),
-    IMAGES = require('../../core/constants/images'),
-    CODE_TYPES = require('../../core/constants/code_types'),
-    STYLE = require('../../core/constants/styles'),
-    FORM_MSG = require('../../core/constants/form_msg'),
-    NAMES = require('../../core/constants/names');
+const Code = require("../../core/models/Code"),
+    Company = require("../../core/models/Company"),
+    Form = require("../../core/models/Form"),
+    IMAGES = require("../../core/constants/images"),
+    CODE_TYPES = require("../../core/constants/code_types"),
+    STYLE = require("../../core/constants/styles"),
+    FORM_MSG = require("../../core/constants/form_msg"),
+    NAMES = require("../../core/constants/names");
 
 module.exports = (req, res) => {
-    const {company_id, name} = req.body;
+    const { company_id, name } = req.body;
 
     if (!name || !name.trim())
         return res.status(400).send({
@@ -17,20 +17,27 @@ module.exports = (req, res) => {
 
     if (!company_id) {
         return createForm(req.session.user_id, name)
-            .then(id => res.status(200).send({id}))
-            .catch(e => res.status(500).send({message: e}));
+            .then((id) => res.status(200).send({ id }))
+            .catch((e) => res.status(500).send({ message: e }));
     }
 
-    Company.findOne({_id: company_id, $or: [{creatorId: req.session.user_id}, {admins: req.session.user_id}], isDeleted: false}, (err, company) => {
-        if (err || !company)
-            return res.status(404).send({
-                message: "Error: company not found",
-            });
+    Company.findOne(
+        {
+            _id: company_id,
+            $or: [{ creatorId: req.session.user_id }, { admins: req.session.user_id }],
+            isDeleted: false,
+        },
+        (err, company) => {
+            if (err || !company)
+                return res.status(404).send({
+                    message: "Error: company not found",
+                });
 
-        createForm(company._id, name)
-            .then(id => res.status(200).send({id}))
-            .catch(e => res.status(500).send({message: e}));
-    });
+            createForm(company._id, name)
+                .then((id) => res.status(200).send({ id }))
+                .catch((e) => res.status(500).send({ message: e }));
+        }
+    );
 };
 
 const createForm = (creatorId, name) => {
@@ -45,7 +52,7 @@ const createForm = (creatorId, name) => {
             msg: FORM_MSG,
         });
 
-        form.save(err => {
+        form.save((err) => {
             if (err) return reject("Error: can't save form");
 
             const code = new Code({
@@ -57,7 +64,7 @@ const createForm = (creatorId, name) => {
                 style: STYLE,
             });
 
-            code.save(err => {
+            code.save((err) => {
                 if (err) return reject("Error: can't save code");
                 resolve(form._id);
             });

@@ -1,11 +1,11 @@
-const Code = require('../../core/models/Code'),
-    IMAGES = require('../../core/constants/images'),
-    CODE_TYPES = require('../../core/constants/code_types'),
-    STYLE = require('../../core/constants/styles'),
-    getFormById = require('../../forms/getFormById');
+const Code = require("../../core/models/Code"),
+    IMAGES = require("../../core/constants/images"),
+    CODE_TYPES = require("../../core/constants/code_types"),
+    STYLE = require("../../core/constants/styles"),
+    getFormById = require("../../forms/getFormById");
 
 module.exports = (req, res) => {
-    const {form_id, name} = req.body;
+    const { form_id, name } = req.body;
 
     if (!form_id || !form_id.trim() || !name || !name.trim())
         return res.status(400).send({
@@ -13,7 +13,7 @@ module.exports = (req, res) => {
         });
 
     getFormById(form_id, req.session.user_id)
-        .then(form => {
+        .then((form) => {
             const code = new Code({
                 formId: form_id,
                 name,
@@ -23,7 +23,7 @@ module.exports = (req, res) => {
                 style: STYLE,
             });
 
-            code.save(err => {
+            code.save((err) => {
                 if (err)
                     return res.status(500).send({
                         message: "Error: can't save code",
@@ -32,7 +32,7 @@ module.exports = (req, res) => {
                 res.status(200).send({});
             });
         })
-        .catch(e => {
+        .catch((e) => {
             res.status(404).send({
                 message: e,
             });

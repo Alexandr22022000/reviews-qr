@@ -1,4 +1,4 @@
-import ACTIONS from './types';
+import ACTIONS from "./types";
 
 const action = (forms) => ({
     type: ACTIONS.SET_FORMS,

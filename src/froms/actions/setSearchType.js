@@ -1,4 +1,4 @@
-import ACTIONS from './types';
+import ACTIONS from "./types";
 
 const action = (searchType) => ({
     type: ACTIONS.SET_SEARCH_TYPE,

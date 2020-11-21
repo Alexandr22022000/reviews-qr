@@ -1,4 +1,4 @@
-import ACTIONS from '../actions/types';
+import ACTIONS from "../actions/types";
 
 const defaultState = {
     processingStatus: 0,
@@ -7,7 +7,7 @@ const defaultState = {
 const statuses = (state = defaultState, action) => {
     switch (action.type) {
         case ACTIONS.SET_ADMINS_PROCESSING:
-            return {...state, processingStatus: action.processingStatus};
+            return { ...state, processingStatus: action.processingStatus };
 
         default:
             return state;

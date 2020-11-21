@@ -8,9 +8,9 @@ const deleteSymbol = (url, symbol) => {
 
 const getCleanUrl = () => {
     let url = window.location.href;
-    if (url.indexOf('localhost:3000', 0) !== -1) return 'http://localhost:5000';
-    url = deleteSymbol(url, '#');
-    url = deleteSymbol(url, '/');
+    if (url.indexOf("localhost:3000", 0) !== -1) return "http://localhost:5000";
+    url = deleteSymbol(url, "#");
+    url = deleteSymbol(url, "/");
     return url;
 };
 

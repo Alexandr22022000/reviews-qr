@@ -1,22 +1,20 @@
-const UserModel = require('../../core/models/User'),
-    bcrypt = require('bcrypt-nodejs');
+const UserModel = require("../../core/models/User"),
+    bcrypt = require("bcrypt-nodejs");
 
 module.exports = (req, res) => {
-    const {email, password} = req.body;
+    const { email, password } = req.body;
 
     if (!email || !email.trim() || !password || !password.trim())
         return res.status(400).send({
-            message: "Error: email or password can't be empty"
+            message: "Error: email or password can't be empty",
         });
 
-    UserModel.findOne({email}, (err, User) => {
+    UserModel.findOne({ email }, (err, User) => {
         if (err || !User)
             return res.status(200).send({
                 message: "Invalid email",
             });
 
-
-        
         req.session.user_id = User._id;
         req.session.user_email = User.email;
         req.session.user_name = User.name;

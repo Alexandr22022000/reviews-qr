@@ -1,4 +1,4 @@
-import ACTIONS from './types';
+import ACTIONS from "./types";
 
 const action = (form, field, msg) => ({
     type: ACTIONS.ADD_ERROR,
