@@ -38,7 +38,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "node ./",
+    "prettier": "prettier --tab-width 4 --print-width 120 --write ./src/**/* ./server/**/* ./index.js"
   },
   "eslintConfig": {
     "extends": [
@@ -57,5 +59,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.2.0"
   }
 }
