@@ -50,7 +50,7 @@ class RestorePasswordRequest extends React.Component {
     }
 
     componentWillMount() {
-        this.props.addError("restore_request", null, null);
+        this.props.addError({ form: "restore_request", field: null, msg: null });
         this.setState({
             email: "",
             recaptcha: "",
@@ -59,7 +59,7 @@ class RestorePasswordRequest extends React.Component {
 
     onChangeCaptcha(hash) {
         this.setState({ recaptcha: hash });
-        this.props.addError("restore_request", "recaptcha", null);
+        this.props.addError({ form: "restore_request", field: "recaptcha", msg: null });
     }
 
     updateInput(value, key) {
@@ -79,12 +79,20 @@ class RestorePasswordRequest extends React.Component {
     validator = {
         email: (value) => {
             let isOk = /\S+@\S+\.\S+/.test(value);
-            this.props.addError("restore_request", "email", isOk ? null : "Invalid email");
+            this.props.addError({
+                form: "restore_request",
+                field: "email",
+                msg: isOk ? null : "Invalid email",
+            });
             return isOk;
         },
         recaptcha: (value) => {
             let isOk = value;
-            this.props.addError("restore_request", "recaptcha", isOk ? null : "Proof that you are not robot");
+            this.props.addError({
+                form: "restore_request",
+                field: "recaptcha",
+                msg: isOk ? null : "Proof that you are not robot",
+            });
             return isOk;
         },
     };

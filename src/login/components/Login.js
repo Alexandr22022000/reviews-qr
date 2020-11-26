@@ -66,7 +66,7 @@ class Login extends React.Component {
     }
 
     componentWillMount() {
-        this.props.addError("login", null, null);
+        this.props.addError({ form: "login", field: null, msg: null });
         this.setState({
             email: "",
             password: "",
@@ -103,12 +103,20 @@ class Login extends React.Component {
     validator = {
         email: (value) => {
             let isOk = /\S+@\S+\.\S+/.test(value);
-            this.props.addError("login", "email", isOk ? null : "Invalid email");
+            this.props.addError({
+                form: "login",
+                field: "email",
+                msg: isOk ? null : "Invalid email",
+            });
             return isOk;
         },
         password: (value) => {
             let isOk = value.length > 0;
-            this.props.addError("login", "password", isOk ? null : "Password can't be empty");
+            this.props.addError({
+                form: "login",
+                field: "password",
+                msg: isOk ? null : "Password can't be empty",
+            });
             return isOk;
         },
     };

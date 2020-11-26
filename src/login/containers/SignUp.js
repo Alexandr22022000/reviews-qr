@@ -1,7 +1,7 @@
 import SignUp from "../components/SignUp";
 import { connect } from "react-redux";
-import addError from "../actions/addError";
-import signup from "../async_actions/signup";
+import {addError} from "../redux/viewLoginSlice";
+import signup from "../api/signup";
 
 const mapStateToProps = (state) => ({
     checkEmail: state.login.checkEmail,

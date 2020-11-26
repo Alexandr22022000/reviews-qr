@@ -1,7 +1,7 @@
 import Navbar from "../components/Navbar";
 import { connect } from "react-redux";
 import getCompanies from "../../companies/async-actions/getCompanies";
-import logout from "../../login/async_actions/logout";
+import logout from "../../login/api/logout";
 import addCompany from "../../companies/async-actions/addCompany";
 import setAddButtonStatus from "../../companies/actions/setAddButtonStatus";
 import setActiveCompanyId from "../../companies/actions/setActiveCompanyId";

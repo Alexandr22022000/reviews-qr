@@ -51,7 +51,7 @@ class RestorePassword extends React.Component {
     }
 
     componentWillMount() {
-        this.props.addError("restore", null, null);
+        this.props.addError({ form: "restore", field: null, msg: null });
         this.setState({
             password: "",
             confirm_password: "",
@@ -83,12 +83,20 @@ class RestorePassword extends React.Component {
     validator = {
         confirm_password: (value) => {
             let isOk = value === this.state.password;
-            this.props.addError("restore", "confirm_password", isOk ? null : "Passwords is not equal");
+            this.props.addError({
+                form: "restore",
+                field: "confirm_password",
+                msg: isOk ? null : "Passwords is not equal",
+            });
             return isOk;
         },
         password: (value) => {
             let isOk = value.length > 6;
-            this.props.addError("restore", "password", isOk ? null : "Password should be more 6 symbols");
+            this.props.addError({
+                form: "restore",
+                field: "password",
+                msg: isOk ? null : "Password should be more 6 symbols",
+            });
             return isOk;
         },
     };

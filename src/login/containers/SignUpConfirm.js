@@ -1,6 +1,6 @@
 import SignUpConfirm from "../components/SignUpConfirm";
 import { connect } from "react-redux";
-import signupConfirm from "../async_actions/signupConfirm";
+import signupConfirm from "../api/signupConfirm";
 
 const mapStateToProps = (state) => ({
     user_name: state.user.name,

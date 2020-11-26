@@ -1,8 +1,8 @@
 import Login from "../components/Login";
 import { connect } from "react-redux";
-import login from "../async_actions/login";
-import googleLogin from "../async_actions/googleLogin";
-import addError from "../actions/addError";
+import login from "../api/login";
+import googleLogin from "../api/googleLogin";
+import {addError} from "../redux/viewLoginSlice";
 
 const mapStateToProps = (state) => ({
     user_name: state.user.name,

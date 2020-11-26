@@ -82,7 +82,7 @@ class SignUp extends React.Component {
     }
 
     componentWillMount() {
-        this.props.addError("signup", null, null);
+        this.props.addError({ form: "signup", field: null, msg: null });
         this.setState({
             email: "",
             name: "",
@@ -94,7 +94,7 @@ class SignUp extends React.Component {
 
     onChangeCaptcha(hash) {
         this.setState({ recaptcha: hash });
-        this.props.addError("signup", "recaptcha", null);
+        this.props.addError({ form: "signup", field: "recaptcha", msg: null });
     }
 
     updateInput(value, key) {
@@ -133,27 +133,47 @@ class SignUp extends React.Component {
     validator = {
         confirm_password: (value) => {
             let isOk = value === this.state.password;
-            this.props.addError("signup", "confirm_password", isOk ? null : "Passwords is not equal");
+            this.props.addError({
+                form: "signup",
+                field: "confirm_password",
+                msg: isOk ? null : "Passwords is not equal",
+            });
             return isOk;
         },
         email: (value) => {
             let isOk = /\S+@\S+\.\S+/.test(value);
-            this.props.addError("signup", "email", isOk ? null : "Invalid email");
+            this.props.addError({
+                form: "signup",
+                field: "email",
+                msg: isOk ? null : "Invalid email",
+            });
             return isOk;
         },
         name: (value) => {
             let isOk = !!value.trim();
-            this.props.addError("signup", "name", isOk ? null : "Name can't be empty");
+            this.props.addError({
+                form: "signup",
+                field: "name",
+                msg: isOk ? null : "Name can't be empty",
+            });
             return isOk;
         },
         password: (value) => {
             let isOk = value.length > 6;
-            this.props.addError("signup", "password", isOk ? null : "Password should be more 6 symbols");
+            this.props.addError({
+                form: "signup",
+                field: "password",
+                msg: isOk ? null : "Password should be more 6 symbols",
+            });
             return isOk;
         },
         recaptcha: (value) => {
             let isOk = value;
-            this.props.addError("signup", "recaptcha", isOk ? null : "Proof that you are not robot");
+            this.props.addError({
+                form: "signup",
+                field: "recaptcha",
+                msg: isOk ? null : "Proof that you are not robot",
+            });
             return isOk;
         },
     };

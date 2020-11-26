@@ -1,7 +1,7 @@
 import RestorePasswordRequest from "../components/RestorePasswordRequest";
 import { connect } from "react-redux";
-import addError from "../actions/addError";
-import restorePasswordRequest from "../async_actions/restorePasswordRequest";
+import {addError} from "../redux/viewLoginSlice";
+import restorePasswordRequest from "../api/restorePasswordRequest";
 
 const mapStateToProps = (state) => ({
     checkEmail: state.login.checkEmail,
