@@ -12,6 +12,9 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
+import { connect } from "react-redux";
+import addForm from "../async-actions/addForm";
+import setActiveFormId from "../actions/setActiveFormId";
 
 class CreateForm extends React.Component {
     render() {
@@ -81,4 +84,14 @@ class CreateForm extends React.Component {
     }
 }
 
-export default CreateForm;
+const mapStateToProps = (state) => ({
+    formId: state.forms.activeFormId,
+    companyId: state.companies.activeCompanyId,
+});
+
+const mapDispatchToProps = {
+    addForm,
+    setActiveFormId,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateForm);

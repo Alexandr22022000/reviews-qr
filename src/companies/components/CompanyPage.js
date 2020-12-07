@@ -1,10 +1,10 @@
 import React from "react";
-import Navbar from "../../core/containers/Navbar";
+import Navbar from "../../core/components/Navbar";
 import { Link } from "react-router-dom";
 import SEARCH from "../../core/constants/search";
-import CreateForm from "../../froms/containers/CreateForm";
-import DeleteRestoreForm from "../../froms/containers/DeleteRestoreForm";
-import CompanyEditor from "../containers/CompanyEditor";
+import CreateForm from "../../froms/components/CreateForm";
+import DeleteRestoreForm from "../../froms/components/DeleteRestoreForm";
+import CompanyEditor from "../components/CompanyEditor";
 
 import CompanyAdmins from "../../admins/containers/CompanyAdmins";
 
@@ -32,6 +32,12 @@ import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import ShareIcon from "@material-ui/icons/Share";
+import { connect } from "react-redux";
+import getCompany from "../../companies/async-actions/getCompany";
+import getForms from "../../froms/async-actions/getForms";
+import addForm from "../../froms/async-actions/addForm";
+import delForm from "../../froms/async-actions/delForm";
+import setSearchType from "../../froms/actions/setSearchType";
 
 class CompanyPage extends React.Component {
     render() {
@@ -293,4 +299,19 @@ class CompanyPage extends React.Component {
     }
 }
 
-export default CompanyPage;
+const mapStateToProps = (state) => ({
+    company: state.companies.activeCompany,
+    companyId: state.companies.activeCompanyId,
+    forms: state.forms.forms,
+    searchType: state.forms.searchType,
+});
+
+const mapDispatchToProps = {
+    getCompany,
+    getForms,
+    addForm,
+    delForm,
+    setSearchType,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CompanyPage);
