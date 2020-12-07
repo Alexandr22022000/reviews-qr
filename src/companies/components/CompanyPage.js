@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import SEARCH from "../../core/constants/search";
 import CreateForm from "../../froms/components/CreateForm";
 import DeleteRestoreForm from "../../froms/components/DeleteRestoreForm";
-import CompanyEditor from "../components/CompanyEditor";
+import CompanyEditor from "./CompanyEditor";
 
-import CompanyAdmins from "../../admins/containers/CompanyAdmins";
+import CompanyAdmins from "../../admins/components/Admins";
 
 import BusinessIcon from "@material-ui/icons/Business";
 import IconButton from "@material-ui/core/IconButton";

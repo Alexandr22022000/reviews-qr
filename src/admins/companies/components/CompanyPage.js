@@ -1,12 +1,12 @@
 import React from "react";
-import Navbar from "../../core/containers/Navbar";
+import Navbar from "../../core/components/Navbar";
 import { Link } from "react-router-dom";
 import SEARCH from "../../core/constants/search";
-import CreateForm from "../../froms/containers/CreateForm";
-import DeleteRestoreForm from "../../froms/containers/DeleteRestoreForm";
-import CompanyEditor from "../containers/CompanyEditor";
+import CreateForm from "../../froms/components/CreateForm";
+import DeleteRestoreForm from "../../froms/components/DeleteRestoreForm";
+import CompanyEditor from "../components/CompanyEditor";
 
-import CompanyAdmins from "../../admins/containers/CompanyAdmins";
+import CompanyAdmins from "../../components/Admins";
 
 import BusinessIcon from "@material-ui/icons/Business";
 import IconButton from "@material-ui/core/IconButton";
