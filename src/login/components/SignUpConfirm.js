@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Redirect } from "react-router-dom";
 import query from "query-string";
 
@@ -9,24 +9,22 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import { connect } from "react-redux";
 import signupConfirm from "../async_actions/signupConfirm";
 
-class Login extends React.Component {
-    render() {
-        if (this.props.user_name) return <Redirect to="/" />;
+const SingUpConfirm = props => {
+    useEffect(() => {
+        props.signupConfirm(query.parse(window.location.search).token);
+    }, []);
 
-        return (
-            <Dialog open={true} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Finishing of registration...</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>Please wait, we are checking your email...</DialogContentText>
-                </DialogContent>
-            </Dialog>
-        );
-    }
+    if (props.user_name) return <Redirect to="/" />;
 
-    componentWillMount() {
-        this.props.signupConfirm(query.parse(window.location.search).token);
-    }
-}
+    return (
+        <Dialog open={true} aria-labelledby="form-dialog-title">
+            <DialogTitle id="form-dialog-title">Finishing of registration...</DialogTitle>
+            <DialogContent>
+                <DialogContentText>Please wait, we are checking your email...</DialogContentText>
+            </DialogContent>
+        </Dialog>
+    );
+};
 
 const mapStateToProps = (state) => ({
     user_name: state.user.name,
@@ -36,4 +34,4 @@ const mapDispatchToProps = {
     signupConfirm,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(SingUpConfirm);
