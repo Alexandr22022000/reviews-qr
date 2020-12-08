@@ -9,6 +9,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import addError from "../actions/addError";
+import restorePasswordRequest from "../async_actions/restorePasswordRequest";
 
 class RestorePasswordRequest extends React.Component {
     render() {
@@ -90,4 +93,14 @@ class RestorePasswordRequest extends React.Component {
     };
 }
 
-export default RestorePasswordRequest;
+const mapStateToProps = (state) => ({
+    checkEmail: state.login.checkEmail,
+    errors: state.login.restore_request_errors,
+});
+
+const mapDispatchToProps = {
+    addError,
+    restorePasswordRequest,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RestorePasswordRequest);

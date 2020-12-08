@@ -7,6 +7,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { connect } from "react-redux";
+import updateCompany from "../../companies/async-actions/updateCompany";
+import delCompany from "../../companies/async-actions/delCompany";
 
 class CompanyEditor extends React.Component {
     render() {
@@ -123,4 +126,13 @@ class CompanyEditor extends React.Component {
     }
 }
 
-export default CompanyEditor;
+const mapStateToProps = (state) => ({
+    company: state.companies.activeCompany,
+});
+
+const mapDispatchToProps = {
+    updateCompany,
+    delCompany,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CompanyEditor);

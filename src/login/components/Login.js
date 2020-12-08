@@ -8,6 +8,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { connect } from "react-redux";
+import login from "../async_actions/login";
+import googleLogin from "../async_actions/googleLogin";
+import addError from "../actions/addError";
 
 class Login extends React.Component {
     render() {
@@ -114,4 +118,16 @@ class Login extends React.Component {
     };
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+    user_name: state.user.name,
+    errors: state.login.login_errors,
+});
+
+const mapDispatchToProps = {
+    login,
+    addError,
+    googleLogin,
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

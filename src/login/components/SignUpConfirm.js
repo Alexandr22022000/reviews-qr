@@ -6,6 +6,8 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
+import { connect } from "react-redux";
+import signupConfirm from "../async_actions/signupConfirm";
 
 const SingUpConfirm = props => {
     useEffect(() => {
@@ -24,4 +26,12 @@ const SingUpConfirm = props => {
     );
 };
 
-export default SingUpConfirm;
+const mapStateToProps = (state) => ({
+    user_name: state.user.name,
+});
+
+const mapDispatchToProps = {
+    signupConfirm,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingUpConfirm);
