@@ -9,6 +9,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import {addError} from "../redux/viewLoginSlice";
+import signup from "../api/signup";
 
 class SignUp extends React.Component {
     render() {
@@ -179,4 +182,14 @@ class SignUp extends React.Component {
     };
 }
 
-export default SignUp;
+const mapStateToProps = (state) => ({
+    checkEmail: state.login.checkEmail,
+    errors: state.login.signup_errors,
+});
+
+const mapDispatchToProps = {
+    addError,
+    signup,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

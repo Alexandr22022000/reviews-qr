@@ -1,13 +1,12 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import './App.css';
-import Navbar from './core/containers/Navbar';
-import CompanyPage from './companies/containers/CompanyPage';
-import Login from './login/containers/Login'; //FIXME add container
-import SignUp from './login/containers/SignUp';
-import SignUpConfirm from './login/containers/SignUpConfirm';
-import RestorePassword from './login/containers/RestorePassword';
-import RestorePasswordRequest from './login/containers/RestorePasswordRequest';
+import CompanyPage from './companies/components/CompanyPage';
+import Login from './login/components/Login'; //FIXME add container
+import SignUp from './login/components/SignUp';
+import SignUpConfirm from './login/components/SignUpConfirm';
+import RestorePassword from './login/components/RestorePassword';
+import RestorePasswordRequest from './login/components/RestorePasswordRequest';
 import TempCompanent from './TempCompanent';
 
 function App() {
