@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Redirect } from "react-router-dom";
 import query from "query-string";
 
@@ -7,23 +7,21 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 
-class Login extends React.Component {
-    render() {
-        if (this.props.user_name) return <Redirect to="/" />;
+const SingUpConfirm = props => {
+    useEffect(() => {
+        props.signupConfirm(query.parse(window.location.search).token);
+    }, []);
 
-        return (
-            <Dialog open={true} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Finishing of registration...</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>Please wait, we are checking your email...</DialogContentText>
-                </DialogContent>
-            </Dialog>
-        );
-    }
+    if (props.user_name) return <Redirect to="/" />;
 
-    componentWillMount() {
-        this.props.signupConfirm(query.parse(window.location.search).token);
-    }
-}
+    return (
+        <Dialog open={true} aria-labelledby="form-dialog-title">
+            <DialogTitle id="form-dialog-title">Finishing of registration...</DialogTitle>
+            <DialogContent>
+                <DialogContentText>Please wait, we are checking your email...</DialogContentText>
+            </DialogContent>
+        </Dialog>
+    );
+};
 
-export default Login;
+export default SingUpConfirm;
