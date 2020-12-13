@@ -1,6 +1,10 @@
 import React from "react";
 import Recaptcha from "react-grecaptcha";
 import CheckYourEmail from "./CheckYourEmail";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import {addError} from "../redux/viewLoginSlice";
+import signup from "../api/signup";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -8,10 +12,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import {addError} from "../redux/viewLoginSlice";
-import signup from "../api/signup";
 
 class SignUp extends React.Component {
     render() {

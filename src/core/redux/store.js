@@ -4,7 +4,7 @@ import thunkMiddleware from "redux-thunk";
 import statuses from "./viewStatusesSlice";
 import user from "../../users/reducers/user";
 import login from "../../login/redux/viewLoginSlice";
-import companies from "../../companies/reducers/companies";
+import companies from "../../companies/redux/viewCompaniesSlice";
 import forms from "../../froms/reducers/forms";
 import admins from "../../admins/reducers/admins";
 

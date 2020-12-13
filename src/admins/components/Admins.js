@@ -18,10 +18,6 @@ import IconButton from "@material-ui/core/IconButton";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Skeleton from "@material-ui/lab/Skeleton";
-import { connect } from "react-redux";
-import invite from "../async-actions/inviteAdminToCompany";
-import reject from "../async-actions/rejectCompanyAdmin";
-import setAdminsProcessing from "../actions/setAdminsProcessing";
 
 class Admins extends React.Component {
     //FIXME add invitations display, add emails display and check (already exist), update on every open
@@ -183,15 +179,4 @@ class Admins extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    object: state.companies.activeCompany,
-    processingStatus: state.admins.processingStatus,
-});
-
-const mapDispatchToProps = {
-    invite,
-    reject,
-    setAdminsProcessing,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Admins);
+export default Admins;

@@ -1,13 +1,13 @@
 import React, {useEffect} from "react";
 import { Redirect } from "react-router-dom";
 import query from "query-string";
+import { connect } from "react-redux";
+import signupConfirm from "../api/signupConfirm";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import { connect } from "react-redux";
-import signupConfirm from "../api/signupConfirm";
 
 const SingUpConfirm = props => {
     useEffect(() => {

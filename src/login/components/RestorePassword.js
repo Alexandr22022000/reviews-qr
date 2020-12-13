@@ -2,6 +2,9 @@ import React from "react";
 import Recaptcha from "react-grecaptcha";
 import { Redirect } from "react-router-dom";
 import query from "query-string";
+import { connect } from "react-redux";
+import { addError } from "../redux/viewLoginSlice";
+import restorePassword from "../api/restorePassword";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -9,9 +12,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { connect } from "react-redux";
-import { addError } from "../redux/viewLoginSlice";
-import restorePassword from "../api/restorePassword";
 
 class RestorePassword extends React.Component {
     render() {

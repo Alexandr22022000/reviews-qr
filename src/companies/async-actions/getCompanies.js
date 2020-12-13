@@ -1,11 +1,11 @@
 import HTTP from "../../core/HTTPS/index";
-import setCompanies from "../actions/setCompanies";
-import setAddButtonStatus from "../actions/setAddButtonStatus";
+import {setCompanies, setAddButtonStatus} from "../redux/viewCompaniesSlice";
+
 
 const action = () => (dispatch, getState) => {
     HTTP.get("/api/companies/get_all", {}, dispatch).then((data) => {
-        dispatch(setCompanies(data.companies));
-        dispatch(setAddButtonStatus(0));
+        dispatch(setCompanies({companies: data.companies}));
+        dispatch(setAddButtonStatus({status : 0}));
     });
 };
 

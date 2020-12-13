@@ -1,6 +1,9 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import Preloader from "../../core/components/Preloader";
+import { connect } from "react-redux";
+import addForm from "../async-actions/addForm";
+import setActiveFormId from "../actions/setActiveFormId";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -12,9 +15,6 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
-import { connect } from "react-redux";
-import addForm from "../async-actions/addForm";
-import setActiveFormId from "../actions/setActiveFormId";
 
 class CreateForm extends React.Component {
     render() {

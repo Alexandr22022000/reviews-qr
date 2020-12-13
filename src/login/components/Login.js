@@ -1,6 +1,10 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import GoogleLogin from "react-google-login";
+import { connect } from "react-redux";
+import login from "../api/login";
+import googleLogin from "../api/googleLogin";
+import {addError} from "../redux/viewLoginSlice";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -8,10 +12,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { connect } from "react-redux";
-import login from "../api/login";
-import googleLogin from "../api/googleLogin";
-import {addError} from "../redux/viewLoginSlice";
 
 class Login extends React.Component {
     render() {

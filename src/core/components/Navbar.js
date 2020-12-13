@@ -1,6 +1,12 @@
 import React from "react";
 import SEARCH from "../constants/search";
 import query from "query-string";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import getCompanies from "../../companies/async-actions/getCompanies";
+import logout from "../../login/api/logout";
+import addCompany from "../../companies/async-actions/addCompany";
+import {setAddButtonStatus, setActiveCompanyId} from "../../companies/redux/viewCompaniesSlice";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -24,13 +30,6 @@ import ShareIcon from "@material-ui/icons/Share";
 import AddIcon from "@material-ui/icons/Add";
 import TextField from "@material-ui/core/TextField";
 import Skeleton from "@material-ui/lab/Skeleton";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import getCompanies from "../../companies/async-actions/getCompanies";
-import logout from "../../login/api/logout";
-import addCompany from "../../companies/async-actions/addCompany";
-import setAddButtonStatus from "../../companies/actions/setAddButtonStatus";
-import setActiveCompanyId from "../../companies/actions/setActiveCompanyId";
 
 class Navbar extends React.Component {
     render() {
@@ -69,7 +68,7 @@ class Navbar extends React.Component {
 
         return (
             <div>
-                <AppBar position="static" onClick={() => this.props.setAddButtonStatus(0)}>
+                <AppBar position="static" onClick={() => this.props.setAddButtonStatus({status: 0})}>
                     <Toolbar>
                         <IconButton
                             edge="start"
@@ -139,7 +138,7 @@ class Navbar extends React.Component {
         this.props.getCompanies();
         let activeCompanyId = query.parse(window.location.search).company;
         if (window.location.pathname === "/" && !activeCompanyId) activeCompanyId = SEARCH.COMPANY_ALL;
-        this.props.setActiveCompanyId(activeCompanyId);
+        this.props.setActiveCompanyId({id: activeCompanyId});
         if (this.props.onChangeCompany) this.props.onChangeCompany(activeCompanyId);
 
         this.setState({
@@ -170,7 +169,7 @@ class Navbar extends React.Component {
         switch (this.props.addButtonStatus) {
             case 0:
                 return (
-                    <ListItem button key={"new"} onClick={() => this.props.setAddButtonStatus(1)}>
+                    <ListItem button key={"new"} onClick={() => this.props.setAddButtonStatus({status: 1})}>
                         <ListItemIcon>
                             <AddIcon />
                         </ListItemIcon>
@@ -199,7 +198,7 @@ class Navbar extends React.Component {
                             <Button
                                 style={{ "margin-right": "8px" }}
                                 onClick={() => {
-                                    this.props.setAddButtonStatus(0);
+                                    this.props.setAddButtonStatus({status: 0});
                                 }}
                             >
                                 {" "}
@@ -236,9 +235,9 @@ class Navbar extends React.Component {
     };
 
     onChangeCompany(id) {
-        this.props.setActiveCompanyId(id);
+        this.props.setActiveCompanyId({id});
         if (this.props.onChangeCompany) this.props.onChangeCompany(id);
-        return this.props.setAddButtonStatus(0);
+        return this.props.setAddButtonStatus({status: 0});
     }
 }
 

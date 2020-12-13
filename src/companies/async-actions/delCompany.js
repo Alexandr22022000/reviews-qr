@@ -1,17 +1,15 @@
 import HTTP from "../../core/HTTPS/index";
-import setCompanies from "../actions/setCompanies";
-import setActiveCompanyId from "../actions/setActiveCompanyId";
-import setActiveCompany from "../actions/setActiveCompany";
+import {setActiveCompanyId, setActiveCompany, setCompanies} from "../redux/viewCompaniesSlice";
 import getCompanies from "./getCompanies";
 import SEARCH from "../../core/constants/search";
 
 const action = (id) => (dispatch, getState) => {
     //FIXME add getting forms
-    dispatch(setCompanies(null));
-    dispatch(setActiveCompany(null));
+    dispatch(setCompanies({companies: null}));
+    dispatch(setActiveCompany({company: null}));
     HTTP.post("/api/companies/del", { id }, dispatch).then((data) => {
         dispatch(getCompanies());
-        dispatch(setActiveCompanyId(SEARCH.COMPANY_ALL));
+        dispatch(setActiveCompanyId({id : SEARCH.COMPANY_ALL}));
     });
 };
 

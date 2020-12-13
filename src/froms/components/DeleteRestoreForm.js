@@ -1,12 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
+import delForm from "../async-actions/delForm";
+import restoreForm from "../async-actions/restoreForm";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
-import { connect } from "react-redux";
-import delForm from "../async-actions/delForm";
-import restoreForm from "../async-actions/restoreForm";
 
 class DeleteRestoreForm extends React.Component {
     render() {
