@@ -1,5 +1,9 @@
 import React from "react";
 import Preloader from "../../core/components/Preloader";
+import { connect } from "react-redux";
+import invite from "../async-actions/inviteAdminToCompany";
+import reject from "../async-actions/rejectCompanyAdmin";
+import setAdminsProcessing from "../actions/setAdminsProcessing";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -71,14 +75,14 @@ class Admins extends React.Component {
                         {admin.isCreator ? (
                             ""
                         ) : (
-                            <IconButton
-                                onClick={() =>
-                                    this.setState({ idForRejection: admin.id, nameForRejection: admin.name })
-                                }
-                            >
-                                <HighlightOffIcon />
-                            </IconButton>
-                        )}
+                                <IconButton
+                                    onClick={() =>
+                                        this.setState({ idForRejection: admin.id, nameForRejection: admin.name })
+                                    }
+                                >
+                                    <HighlightOffIcon />
+                                </IconButton>
+                            )}
                     </ListItemSecondaryAction>
                 </ListItem>
             ));
@@ -109,28 +113,28 @@ class Admins extends React.Component {
                             Invite Admin
                         </Button>
                     ) : (
-                        <div>
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                label="Email"
-                                type="email"
-                                style={{ marginTop: 0, width: "70%" }}
-                                error={this.state.errorEmail}
-                                helperText={this.state.errorEmail}
-                                onChange={(e) => this.updateInput(e.target.value)}
-                                value={this.state.email}
-                            />
-                            <Button
-                                style={{ marginTop: "10px", width: "30%" }}
-                                onClick={this.invite.bind(this)}
-                                color="primary"
-                                variant="contained"
-                            >
-                                Send
+                            <div>
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    label="Email"
+                                    type="email"
+                                    style={{ marginTop: 0, width: "70%" }}
+                                    error={this.state.errorEmail}
+                                    helperText={this.state.errorEmail}
+                                    onChange={(e) => this.updateInput(e.target.value)}
+                                    value={this.state.email}
+                                />
+                                <Button
+                                    style={{ marginTop: "10px", width: "30%" }}
+                                    onClick={this.invite.bind(this)}
+                                    color="primary"
+                                    variant="contained"
+                                >
+                                    Send
                             </Button>
-                        </div>
-                    )}
+                            </div>
+                        )}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.onClose.bind(this)}>Close</Button>
@@ -179,4 +183,15 @@ class Admins extends React.Component {
     }
 }
 
-export default Admins;
+const mapStateToProps = (state) => ({
+    object: state.forms.activeForm,
+    processingStatus: state.admins.processingStatus,
+});
+
+const mapDispatchToProps = {
+    invite,
+    reject,
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Admins);
