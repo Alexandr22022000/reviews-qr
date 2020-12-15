@@ -1,5 +1,5 @@
 import HTTP from "../../core/HTTPS/index";
-import {setActiveCompanyId, setActiveCompany} from "../redux/viewCompaniesSlice";
+import {setActiveCompany, setActiveCompanyId} from "../redux/viewCompaniesSlice";
 
 const action = (id) => (dispatch, getState) => {
     dispatch(setActiveCompanyId({id}));

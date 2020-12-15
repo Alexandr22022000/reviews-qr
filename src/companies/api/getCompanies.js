@@ -1,5 +1,5 @@
 import HTTP from "../../core/HTTPS/index";
-import {setCompanies, setAddButtonStatus} from "../redux/viewCompaniesSlice";
+import {setAddButtonStatus, setCompanies} from "../redux/viewCompaniesSlice";
 
 
 const action = () => (dispatch, getState) => {

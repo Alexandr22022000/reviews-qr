@@ -3,9 +3,9 @@ import SEARCH from "../constants/search";
 import query from "query-string";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import getCompanies from "../../companies/async-actions/getCompanies";
+import getCompanies from "../../companies/api/getCompanies";
 import logout from "../../login/api/logout";
-import addCompany from "../../companies/async-actions/addCompany";
+import addCompany from "../../companies/api/addCompany";
 import {setAddButtonStatus, setActiveCompanyId} from "../../companies/redux/viewCompaniesSlice";
 
 import AppBar from "@material-ui/core/AppBar";

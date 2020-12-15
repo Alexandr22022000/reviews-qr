@@ -1,5 +1,5 @@
 import HTTP from "../../core/HTTPS/index";
-import getCompany from "../../companies/async-actions/getCompany";
+import getCompany from "../../companies/api/getCompany";
 
 const action = (admin_id) => (dispatch, getState) => {
     HTTP.post("/api/companies/reject_admin", { admin_id, id: getState().companies.activeCompanyId }, dispatch).then(

@@ -2,8 +2,8 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import Preloader from "../../core/components/Preloader";
 import { connect } from "react-redux";
-import addForm from "../async-actions/addForm";
-import setActiveFormId from "../actions/setActiveFormId";
+import addForm from "../api/addForm";
+import {setActiveFormId} from "../redux/viewFormsSlice";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -63,7 +63,7 @@ class CreateForm extends React.Component {
             errorName: "",
             processing: false,
         });
-        this.props.setActiveFormId(null);
+        this.props.setActiveFormId({id: null});
     }
 
     updateInput(value, key) {

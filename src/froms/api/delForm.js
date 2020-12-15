@@ -1,10 +1,10 @@
 import HTTP from "../../core/HTTPS/index";
-import setForms from "../actions/setForms";
+import {setForms} from "../redux/viewFormsSlice";
 import getForms from "./getForms";
 
 const action = (id) => (dispatch, getState) => {
-    dispatch(setForms(null));
-    HTTP.post("/api/forms/restore", { id }, dispatch).then((data) => {
+    dispatch(setForms({forms: null}));
+    HTTP.post("/api/forms/del", { id }, dispatch).then((data) => {
         dispatch(getForms());
     });
 };

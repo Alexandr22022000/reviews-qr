@@ -5,7 +5,7 @@ import statuses from "./viewStatusesSlice";
 import user from "../../users/reducers/user";
 import login from "../../login/redux/viewLoginSlice";
 import companies from "../../companies/redux/viewCompaniesSlice";
-import forms from "../../froms/reducers/forms";
+import forms from "../../froms/redux/viewFormsSlice";
 import admins from "../../admins/reducers/admins";
 
 const mainReducer = combineReducers({

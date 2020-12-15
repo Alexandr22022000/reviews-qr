@@ -1,5 +1,5 @@
 import HTTP from "../../core/HTTPS/index";
-import {setActiveCompanyId, setActiveCompany, setCompanies} from "../redux/viewCompaniesSlice";
+import {setActiveCompany, setActiveCompanyId, setCompanies} from "../redux/viewCompaniesSlice";
 import getCompanies from "./getCompanies";
 import SEARCH from "../../core/constants/search";
 

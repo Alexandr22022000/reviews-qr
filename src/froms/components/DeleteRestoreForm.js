@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import delForm from "../async-actions/delForm";
-import restoreForm from "../async-actions/restoreForm";
+import delForm from "../api/delForm";
+import restoreForm from "../api/restoreForm";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";

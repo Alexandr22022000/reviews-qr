@@ -1,5 +1,5 @@
 import HTTP from "../../core/HTTPS/index";
-import setActiveFormId from "../actions/setActiveFormId";
+import {setActiveFormId} from "../redux/viewFormsSlice";
 import SEARCH from "../../core/constants/search";
 
 const action = (name) => (dispatch, getState) => {
@@ -8,7 +8,7 @@ const action = (name) => (dispatch, getState) => {
         company_id = null;
 
     HTTP.post("/api/forms/add", { company_id, name }, dispatch).then((data) => {
-        dispatch(setActiveFormId(data.id));
+        dispatch(setActiveFormId({id: data.id}));
     });
 };
 

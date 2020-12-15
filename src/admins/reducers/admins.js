@@ -1,5 +1,6 @@
 import ACTIONS from "../actions/types";
 
+
 const defaultState = {
     processingStatus: 0,
 };
