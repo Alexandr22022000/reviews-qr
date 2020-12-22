@@ -1,11 +1,11 @@
 import HTTP from "../../core/HTTPS/index";
-import {setActiveCompany, setActiveCompanyId} from "../redux/viewCompaniesSlice";
+import { setActiveCompany, setActiveCompanyId } from "../redux/viewCompaniesSlice";
 
 const action = (id) => (dispatch, getState) => {
-    dispatch(setActiveCompanyId({id}));
-    dispatch(setActiveCompany({company : null}));
+    dispatch(setActiveCompanyId({ id }));
+    dispatch(setActiveCompany({ company: null }));
     HTTP.get("/api/companies/get", { id }, dispatch).then((company) => {
-        dispatch(setActiveCompany({company}));
+        dispatch(setActiveCompany({ company }));
     });
 };
 

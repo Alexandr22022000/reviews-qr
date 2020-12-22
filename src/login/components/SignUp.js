@@ -3,7 +3,7 @@ import Recaptcha from "react-grecaptcha";
 import CheckYourEmail from "./CheckYourEmail";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import {addError} from "../redux/viewLoginSlice";
+import { addError } from "../redux/viewLoginSlice";
 import signup from "../api/signup";
 
 import Dialog from "@material-ui/core/Dialog";

@@ -1,5 +1,5 @@
 import SEARCH from "../../core/constants/search";
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     companies: null,
@@ -9,30 +9,24 @@ const initialState = {
 };
 
 const slice = createSlice({
-    name: 'companies',
+    name: "companies",
     initialState,
     reducers: {
-        setCompanies: (state, {payload}) => {
+        setCompanies: (state, { payload }) => {
             state.companies = payload.companies;
         },
-        setActiveCompanyId:  (state, {payload} ) => {
-            state.activeCompanyId = payload.id
+        setActiveCompanyId: (state, { payload }) => {
+            state.activeCompanyId = payload.id;
         },
-        setActiveCompany: (state, {payload}) => {
-            state.activeCompany = payload.company
+        setActiveCompany: (state, { payload }) => {
+            state.activeCompany = payload.company;
         },
-        setAddButtonStatus: (state, {payload}) => {
-            state.addButtonStatus = payload.status
-        }
-
-    }
+        setAddButtonStatus: (state, { payload }) => {
+            state.addButtonStatus = payload.status;
+        },
+    },
 });
 
-export const {
-    setCompanies,
-    setActiveCompanyId,
-    setActiveCompany,
-    setAddButtonStatus
-} = slice.actions;
+export const { setCompanies, setActiveCompanyId, setActiveCompany, setAddButtonStatus } = slice.actions;
 
 export default slice.reducer;

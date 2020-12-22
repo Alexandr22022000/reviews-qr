@@ -1,4 +1,4 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import thunkMiddleware from "redux-thunk";
 
 import statuses from "./viewStatusesSlice";
@@ -19,5 +19,5 @@ const mainReducer = combineReducers({
 
 export default configureStore({
     reducer: mainReducer,
-    middleware: [thunkMiddleware]
+    middleware: [thunkMiddleware],
 });

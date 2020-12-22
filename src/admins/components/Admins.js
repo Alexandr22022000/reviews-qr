@@ -32,12 +32,12 @@ class Admins extends React.Component {
             return (
                 <Dialog
                     open={true}
-                    onClose={() => this.props.setAdminsProcessing({processingStatus: 0})}
+                    onClose={() => this.props.setAdminsProcessing({ processingStatus: 0 })}
                     aria-labelledby="form-dialog-title"
                 >
                     <DialogTitle>{`Invitation sent to ${this.state.email}`}</DialogTitle>
                     <DialogActions>
-                        <Button onClick={() => this.props.setAdminsProcessing({processingStatus: 0})}>Ok</Button>
+                        <Button onClick={() => this.props.setAdminsProcessing({ processingStatus: 0 })}>Ok</Button>
                     </DialogActions>
                 </Dialog>
             );
@@ -61,8 +61,10 @@ class Admins extends React.Component {
 
         let admins;
         if (this.props.object) {
-            console.log('sadasdsadsssssssssssssssssss', this.props.object);
-            admins = this.props.object.admins.sort((a, b) => (a.isCreator ? -1 : 1)) && this.props.object.admins.sort((a, b) => (a.isCreator ? -1 : 1));
+            console.log("sadasdsadsssssssssssssssssss", this.props.object);
+            admins =
+                this.props.object.admins.sort((a, b) => (a.isCreator ? -1 : 1)) &&
+                this.props.object.admins.sort((a, b) => (a.isCreator ? -1 : 1));
             admins = admins.map((admin) => (
                 <ListItem>
                     <ListItemAvatar>
@@ -76,19 +78,18 @@ class Admins extends React.Component {
                         {admin.isCreator ? (
                             ""
                         ) : (
-                                <IconButton
-                                    onClick={() =>
-                                        this.setState({ idForRejection: admin.id, nameForRejection: admin.name })
-                                    }
-                                >
-                                    <HighlightOffIcon />
-                                </IconButton>
-                            )}
+                            <IconButton
+                                onClick={() =>
+                                    this.setState({ idForRejection: admin.id, nameForRejection: admin.name })
+                                }
+                            >
+                                <HighlightOffIcon />
+                            </IconButton>
+                        )}
                     </ListItemSecondaryAction>
                 </ListItem>
             ));
-        }
-        else {
+        } else {
             admins = [0, 1].map((i) => (
                 <ListItem>
                     <ListItemAvatar>
@@ -115,28 +116,28 @@ class Admins extends React.Component {
                             Invite Admin
                         </Button>
                     ) : (
-                            <div>
-                                <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    label="Email"
-                                    type="email"
-                                    style={{ marginTop: 0, width: "70%" }}
-                                    error={this.state.errorEmail}
-                                    helperText={this.state.errorEmail}
-                                    onChange={(e) => this.updateInput(e.target.value)}
-                                    value={this.state.email}
-                                />
-                                <Button
-                                    style={{ marginTop: "10px", width: "30%" }}
-                                    onClick={this.invite.bind(this)}
-                                    color="primary"
-                                    variant="contained"
-                                >
-                                    Send
+                        <div>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                label="Email"
+                                type="email"
+                                style={{ marginTop: 0, width: "70%" }}
+                                error={this.state.errorEmail}
+                                helperText={this.state.errorEmail}
+                                onChange={(e) => this.updateInput(e.target.value)}
+                                value={this.state.email}
+                            />
+                            <Button
+                                style={{ marginTop: "10px", width: "30%" }}
+                                onClick={this.invite.bind(this)}
+                                color="primary"
+                                variant="contained"
+                            >
+                                Send
                             </Button>
-                            </div>
-                        )}
+                        </div>
+                    )}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.onClose.bind(this)}>Close</Button>
@@ -185,7 +186,6 @@ class Admins extends React.Component {
     }
 }
 
-
 const mapStateToProps = (state) => ({
     object: state.companies.activeCompany,
     processingStatus: state.admins.processingStatus,
@@ -198,5 +198,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Admins);
-
-

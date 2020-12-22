@@ -4,7 +4,7 @@ import GoogleLogin from "react-google-login";
 import { connect } from "react-redux";
 import login from "../api/login";
 import googleLogin from "../api/googleLogin";
-import {addError} from "../redux/viewLoginSlice";
+import { addError } from "../redux/viewLoginSlice";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -136,6 +136,5 @@ const mapDispatchToProps = {
     addError,
     googleLogin,
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

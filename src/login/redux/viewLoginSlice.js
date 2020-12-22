@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     login_errors: {
@@ -26,10 +26,10 @@ const initialState = {
 };
 
 const slice = createSlice({
-    name: 'login',
+    name: "login",
     initialState,
     reducers: {
-        addError: (state, {payload}) => {
+        addError: (state, { payload }) => {
             if (!payload.form) return initialState;
 
             const form = state[payload.form + "_errors"];
@@ -39,15 +39,12 @@ const slice = createSlice({
                 form[payload.field] = payload.msg;
             }
         },
-        setCheckEmail: state => {
+        setCheckEmail: (state) => {
             state.checkEmail = true;
         },
-    }
+    },
 });
 
-export const {
-    addError,
-    setCheckEmail,
-} = slice.actions;
+export const { addError, setCheckEmail } = slice.actions;
 
 export default slice.reducer;

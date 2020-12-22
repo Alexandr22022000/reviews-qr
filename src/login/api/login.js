@@ -22,7 +22,7 @@ const login = (email, password) => (dispatch, getState) => {
                 })
             );
 
-        dispatch(setUser({name: data.name, email: data.email, img: data.img}));
+        dispatch(setUser({ name: data.name, email: data.email, img: data.img }));
     });
 };
 

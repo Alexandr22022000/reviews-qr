@@ -3,7 +3,7 @@ import Recaptcha from "react-grecaptcha";
 import CheckYourEmail from "./CheckYourEmail";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import {addError} from "../redux/viewLoginSlice";
+import { addError } from "../redux/viewLoginSlice";
 import restorePasswordRequest from "../api/restorePasswordRequest";
 
 import Dialog from "@material-ui/core/Dialog";
@@ -12,7 +12,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-
 
 class RestorePasswordRequest extends React.Component {
     render() {
