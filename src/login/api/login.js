@@ -1,5 +1,5 @@
 import HTTP from "../../core/HTTPS/index";
-import setUser from "../../users/actions/setUser";
+import setUser from "../../users/api/setUser";
 import { addError } from "../redux/viewLoginSlice";
 
 const login = (email, password) => (dispatch, getState) => {
@@ -22,7 +22,7 @@ const login = (email, password) => (dispatch, getState) => {
                 })
             );
 
-        dispatch(setUser(data.name, data.email, data.img));
+        dispatch(setUser({name: data.name, email: data.email, img: data.img}));
     });
 };
 

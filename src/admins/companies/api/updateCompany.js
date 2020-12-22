@@ -1,9 +1,9 @@
 import HTTP from "../../core/HTTPS/index";
-import setActiveCompany from "../actions/setActiveCompany";
+import setActiveCompany from "../redux/viewCompaniesSlice";
 import getCompany from "./getCompany";
 
 const action = (company) => (dispatch, getState) => {
-    dispatch(setActiveCompany(null));
+    dispatch(setActiveCompany({activeCompany: null}));
     HTTP.post("/api/companies/update", { ...company }, dispatch).then((data) => {
         dispatch(getCompany(company.id));
     });

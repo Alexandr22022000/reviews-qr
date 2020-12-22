@@ -1,10 +1,10 @@
 import HTTP from "../../core/HTTPS/index";
-import setAdminsProcessing from "../actions/setAdminsProcessing";
+import {setAdminsProcessing} from "../redux/viewAdminsSlice";
 
 const action = (email) => (dispatch, getState) => {
-    dispatch(setAdminsProcessing(1));
+    dispatch(setAdminsProcessing({processingStatus: 1}));
     HTTP.post("/api/forms/invite_admin", { email, id: getState().forms.activeFormId }, dispatch).then((data) => {
-        dispatch(setAdminsProcessing(-1));
+        dispatch(setAdminsProcessing({processingStatus: -1}));
     });
 };
 

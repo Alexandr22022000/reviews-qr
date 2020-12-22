@@ -1,4 +1,3 @@
-
 import SEARCH from "../../core/constants/search";
 import { createSlice } from '@reduxjs/toolkit';
 

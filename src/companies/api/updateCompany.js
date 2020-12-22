@@ -3,7 +3,7 @@ import {setActiveCompany} from "../redux/viewCompaniesSlice";
 import getCompany from "./getCompany";
 
 const action = (company) => (dispatch, getState) => {
-    dispatch(setActiveCompany({company}));
+    dispatch(setActiveCompany({company: null}));
     HTTP.post("/api/companies/update", { ...company }, dispatch).then((data) => {
         dispatch(getCompany(company.id));
     });

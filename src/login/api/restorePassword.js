@@ -1,5 +1,5 @@
 import HTTP from "../../core/HTTPS/index";
-import setUser from "../../users/actions/setUser";
+import setUser from "../../users/api/setUser";
 
 const login = (password, token) => (dispatch, getState) => {
     HTTP.post("/api/restore_password", { token, password }, dispatch).then((data) => {

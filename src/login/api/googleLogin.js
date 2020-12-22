@@ -1,5 +1,5 @@
 import HTTP from "../../core/HTTPS/index";
-import setUser from "../../users/actions/setUser";
+import setUser from "../../users/api/setUser";
 import { addError } from "../redux/viewLoginSlice";
 
 const login = (email, name, img, token) => (dispatch, getState) => {

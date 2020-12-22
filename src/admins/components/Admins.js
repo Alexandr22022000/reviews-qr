@@ -1,9 +1,9 @@
 import React from "react";
 import Preloader from "../../core/components/Preloader";
 import { connect } from "react-redux";
-import invite from "../async-actions/inviteAdminToCompany";
-import reject from "../async-actions/rejectCompanyAdmin";
-import setAdminsProcessing from "../actions/setAdminsProcessing";
+import invite from "../api/inviteAdminToCompany";
+import reject from "../api/rejectCompanyAdmin";
+import setAdminsProcessing from "../redux/viewAdminsSlice";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -32,12 +32,12 @@ class Admins extends React.Component {
             return (
                 <Dialog
                     open={true}
-                    onClose={() => this.props.setAdminsProcessing(0)}
+                    onClose={() => this.props.setAdminsProcessing({processingStatus: 0})}
                     aria-labelledby="form-dialog-title"
                 >
                     <DialogTitle>{`Invitation sent to ${this.state.email}`}</DialogTitle>
                     <DialogActions>
-                        <Button onClick={() => this.props.setAdminsProcessing(0)}>Ok</Button>
+                        <Button onClick={() => this.props.setAdminsProcessing({processingStatus: 0})}>Ok</Button>
                     </DialogActions>
                 </Dialog>
             );
@@ -61,7 +61,8 @@ class Admins extends React.Component {
 
         let admins;
         if (this.props.object) {
-            admins = this.props.object.admins.sort((a, b) => (a.isCreator ? -1 : 1));
+            console.log('sadasdsadsssssssssssssssssss', this.props.object);
+            admins = this.props.object.admins.sort((a, b) => (a.isCreator ? -1 : 1)) && this.props.object.admins.sort((a, b) => (a.isCreator ? -1 : 1));
             admins = admins.map((admin) => (
                 <ListItem>
                     <ListItemAvatar>
@@ -86,7 +87,8 @@ class Admins extends React.Component {
                     </ListItemSecondaryAction>
                 </ListItem>
             ));
-        } else {
+        }
+        else {
             admins = [0, 1].map((i) => (
                 <ListItem>
                     <ListItemAvatar>
@@ -183,15 +185,18 @@ class Admins extends React.Component {
     }
 }
 
+
 const mapStateToProps = (state) => ({
-    object: state.forms.activeForm,
+    object: state.companies.activeCompany,
     processingStatus: state.admins.processingStatus,
 });
 
 const mapDispatchToProps = {
     invite,
     reject,
+    setAdminsProcessing,
 };
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(Admins);
+
+
