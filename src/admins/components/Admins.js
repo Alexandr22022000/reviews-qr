@@ -61,7 +61,6 @@ class Admins extends React.Component {
 
         let admins;
         if (this.props.object) {
-            console.log("sadasdsadsssssssssssssssssss", this.props.object);
             admins =
                 this.props.object.admins.sort((a, b) => (a.isCreator ? -1 : 1)) &&
                 this.props.object.admins.sort((a, b) => (a.isCreator ? -1 : 1));
