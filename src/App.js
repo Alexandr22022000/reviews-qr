@@ -8,6 +8,7 @@ import SignUpConfirm from "./login/components/SignUpConfirm";
 import RestorePassword from "./login/components/RestorePassword";
 import RestorePasswordRequest from "./login/components/RestorePasswordRequest";
 import TempCompanent from "./TempCompanent";
+import Form from "./froms/components/From"
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <Route exact path="/restore_password" children={<RestorePassword />} />
                 <Route exact path="/restore_password_request" children={<RestorePasswordRequest />} />
                 <Route exact path="/temp" children={<TempCompanent />} />
+                <Route exact path ="/form" children={<Form />} />
             </Switch>
         </div>
     );

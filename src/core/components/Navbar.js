@@ -1,7 +1,7 @@
 import React from "react";
 import SEARCH from "../constants/search";
 import query from "query-string";
-import { Link } from "react-router-dom";
+import {Link, Route} from "react-router-dom";
 import { connect } from "react-redux";
 import getCompanies from "../../companies/api/getCompanies";
 import logout from "../../login/api/logout";
@@ -30,6 +30,7 @@ import ShareIcon from "@material-ui/icons/Share";
 import AddIcon from "@material-ui/icons/Add";
 import TextField from "@material-ui/core/TextField";
 import Skeleton from "@material-ui/lab/Skeleton";
+import CompanyPage from "../../companies/components/CompanyPage";
 
 class Navbar extends React.Component {
     render() {
@@ -229,7 +230,6 @@ class Navbar extends React.Component {
     addNewCompany = (e) => {
         let name = this.state.newCompanyName;
         if (!name || !name.trim()) return this.setState({ addCompanyError: "Name can't be empty" });
-
         this.props.addCompany(name);
         this.setState({ newCompanyName: "New company", addCompanyError: "" });
     };
