@@ -27,6 +27,7 @@ class Form extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+    name: state.forms.activeForm || state.forms.activeForm.name
 });
 
 const mapDispatchToProps = {
