@@ -1,6 +1,10 @@
 import React from "react";
 import Recaptcha from "react-grecaptcha";
 import CheckYourEmail from "./CheckYourEmail";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { addError } from "../redux/viewLoginSlice";
+import restorePasswordRequest from "../api/restorePasswordRequest";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -8,10 +12,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import addError from "../actions/addError";
-import restorePasswordRequest from "../async_actions/restorePasswordRequest";
 
 class RestorePasswordRequest extends React.Component {
     render() {
@@ -53,7 +53,7 @@ class RestorePasswordRequest extends React.Component {
     }
 
     componentWillMount() {
-        this.props.addError("restore_request", null, null);
+        this.props.addError({ form: "restore_request", field: null, msg: null });
         this.setState({
             email: "",
             recaptcha: "",
@@ -62,7 +62,7 @@ class RestorePasswordRequest extends React.Component {
 
     onChangeCaptcha(hash) {
         this.setState({ recaptcha: hash });
-        this.props.addError("restore_request", "recaptcha", null);
+        this.props.addError({ form: "restore_request", field: "recaptcha", msg: null });
     }
 
     updateInput(value, key) {
@@ -82,12 +82,20 @@ class RestorePasswordRequest extends React.Component {
     validator = {
         email: (value) => {
             let isOk = /\S+@\S+\.\S+/.test(value);
-            this.props.addError("restore_request", "email", isOk ? null : "Invalid email");
+            this.props.addError({
+                form: "restore_request",
+                field: "email",
+                msg: isOk ? null : "Invalid email",
+            });
             return isOk;
         },
         recaptcha: (value) => {
             let isOk = value;
-            this.props.addError("restore_request", "recaptcha", isOk ? null : "Proof that you are not robot");
+            this.props.addError({
+                form: "restore_request",
+                field: "recaptcha",
+                msg: isOk ? null : "Proof that you are not robot",
+            });
             return isOk;
         },
     };

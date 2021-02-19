@@ -1,5 +1,5 @@
 import axios from "axios";
-import requestError from "../actions/requestError";
+import { requestError } from "../redux/viewStatusesSlice";
 
 import getCleanUrl from "./getCleanUrl";
 

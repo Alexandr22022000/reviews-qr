@@ -246,7 +246,7 @@ class CompanyPage extends React.Component {
     }
 
     onChangeCompany(id) {
-        this.props.setSearchType(SEARCH.FORMS);
+        this.props.setSearchType({ searchType: SEARCH.FORMS });
         this.props.getForms();
 
         if (id !== SEARCH.COMPANY_ALL && id !== SEARCH.COMPANY_MY && id !== SEARCH.COMPANY_SHARED)
@@ -254,7 +254,7 @@ class CompanyPage extends React.Component {
     }
 
     onUpdateSearchType(value) {
-        this.props.setSearchType(value);
+        this.props.setSearchType({ searchType: value });
         this.props.getForms(value);
     }
 

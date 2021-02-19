@@ -5,6 +5,12 @@ import SEARCH from "../../core/constants/search";
 import CreateForm from "../../froms/components/CreateForm";
 import DeleteRestoreForm from "../../froms/components/DeleteRestoreForm";
 import CompanyEditor from "./CompanyEditor";
+import getCompany from "../api/getCompany";
+import getForms from "../../froms/api/getForms";
+import addForm from "../../froms/api/addForm";
+import delForm from "../../froms/api/delForm";
+import { setSearchType } from "../../froms/redux/viewFormsSlice";
+import { connect } from "react-redux";
 
 import CompanyAdmins from "../../admins/components/Admins";
 
@@ -32,12 +38,6 @@ import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import ShareIcon from "@material-ui/icons/Share";
-import { connect } from "react-redux";
-import getCompany from "../../companies/async-actions/getCompany";
-import getForms from "../../froms/async-actions/getForms";
-import addForm from "../../froms/async-actions/addForm";
-import delForm from "../../froms/async-actions/delForm";
-import setSearchType from "../../froms/actions/setSearchType";
 
 class CompanyPage extends React.Component {
     render() {
@@ -252,7 +252,7 @@ class CompanyPage extends React.Component {
     }
 
     onChangeCompany(id) {
-        this.props.setSearchType(SEARCH.FORMS);
+        this.props.setSearchType({ searchType: SEARCH.FORMS });
         this.props.getForms();
 
         if (id !== SEARCH.COMPANY_ALL && id !== SEARCH.COMPANY_MY && id !== SEARCH.COMPANY_SHARED)
@@ -260,7 +260,7 @@ class CompanyPage extends React.Component {
     }
 
     onUpdateSearchType(value) {
-        this.props.setSearchType(value);
+        this.props.setSearchType({ searchType: value });
         this.props.getForms(value);
     }
 

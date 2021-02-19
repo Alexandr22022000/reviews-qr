@@ -1,6 +1,10 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import GoogleLogin from "react-google-login";
+import { connect } from "react-redux";
+import login from "../api/login";
+import googleLogin from "../api/googleLogin";
+import { addError } from "../redux/viewLoginSlice";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -8,10 +12,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { connect } from "react-redux";
-import login from "../async_actions/login";
-import googleLogin from "../async_actions/googleLogin";
-import addError from "../actions/addError";
 
 class Login extends React.Component {
     render() {
@@ -70,7 +70,7 @@ class Login extends React.Component {
     }
 
     componentWillMount() {
-        this.props.addError("login", null, null);
+        this.props.addError({ form: "login", field: null, msg: null });
         this.setState({
             email: "",
             password: "",
@@ -107,12 +107,20 @@ class Login extends React.Component {
     validator = {
         email: (value) => {
             let isOk = /\S+@\S+\.\S+/.test(value);
-            this.props.addError("login", "email", isOk ? null : "Invalid email");
+            this.props.addError({
+                form: "login",
+                field: "email",
+                msg: isOk ? null : "Invalid email",
+            });
             return isOk;
         },
         password: (value) => {
             let isOk = value.length > 0;
-            this.props.addError("login", "password", isOk ? null : "Password can't be empty");
+            this.props.addError({
+                form: "login",
+                field: "password",
+                msg: isOk ? null : "Password can't be empty",
+            });
             return isOk;
         },
     };
@@ -128,6 +136,5 @@ const mapDispatchToProps = {
     addError,
     googleLogin,
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
