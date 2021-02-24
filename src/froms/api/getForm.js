@@ -5,7 +5,7 @@ const action = (id) => (dispatch, getState) => {
     dispatch(setActiveForm({ form: null }));
     dispatch(setActiveFormId({ id }));
     HTTP.get("/api/forms/get", { id }, dispatch).then((data) => {
-        dispatch(setActiveForm({ form: data.form }));
+        dispatch(setActiveForm({ form: data }));
     });
 };
 

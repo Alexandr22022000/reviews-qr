@@ -97,7 +97,6 @@ const usersView = (users, questions, sort_by) => {
 
 const questionsView = (users, questions, showDeleted) => {
     if (!showDeleted) questions = questions.filter((question) => !question.isDeleted);
-
     questions = questions.map((question) => {
         const answers = users.map((user) => {
             for (let key in user.answers) {

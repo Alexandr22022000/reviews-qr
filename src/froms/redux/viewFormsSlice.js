@@ -15,10 +15,14 @@ const slice = createSlice({
     reducers: {
         setForms: (state, { payload }) => {
             state.forms = payload.forms;
+
         },
         setActiveForm: (state, { payload }) => {
             state.activeForm = payload.form;
-            state.questions = payload.form.questions;
+            if (payload.form)
+                state.questions = payload.form.questions;
+            else
+                state.questions = 1;
         },
         setActiveFormId: (state, { payload }) => {
             state.activeFormId = payload.id;
