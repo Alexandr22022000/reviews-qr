@@ -43,6 +43,7 @@ class Navbar extends React.Component {
 
             companies = companies.map((company) => (
                 <ListItem
+                    alignItems = {"center"}
                     style={company.id === this.props.activeCompanyId ? { backgroundColor: "#b3b3b3" } : {}}
                     component={Link}
                     to={"/?company=" + company.id}
@@ -50,7 +51,7 @@ class Navbar extends React.Component {
                     button
                     key={company.id}
                 >
-                    <ListItemIcon>{this.getCompanyIcon(company.img)}</ListItemIcon>
+                    <ListItemIcon >{this.getCompanyIcon(company.img)}</ListItemIcon>
                     <ListItemText primary={company.name} />
                 </ListItem>
             ));
@@ -96,12 +97,15 @@ class Navbar extends React.Component {
                         </IconButton>
                         <Menu
                             anchorEl={"primary-search-account-menu"}
-                            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                            anchorOrigin={{  vertical: 'top', horizontal: 'right', }}
                             id={1}
                             keepMounted
                             transformOrigin={{ vertical: "top", horizontal: "right" }}
+                            anchorPosition={{left:20000, top:40}}
+                            anchorReference={'anchorPosition'}
                             open={this.state.showAccountMenu}
                             onClose={() => this.setState({ showAccountMenu: false })}
+
                         >
                             <MenuItem component={Link} to={"/profile"}>
                                 Profile
@@ -226,7 +230,6 @@ class Navbar extends React.Component {
                 );
         }
     }
-
     addNewCompany = (e) => {
         let name = this.state.newCompanyName;
         if (!name || !name.trim()) return this.setState({ addCompanyError: "Name can't be empty" });

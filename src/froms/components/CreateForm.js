@@ -3,7 +3,6 @@ import { Redirect } from "react-router-dom";
 import Preloader from "../../core/components/Preloader";
 import { connect } from "react-redux";
 import addForm from "../api/addForm";
-import { setActiveFormId } from "../redux/viewFormsSlice";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -18,7 +17,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 
 class CreateForm extends React.Component {
     render() {
-        if (this.props.formId) return <Redirect to={`/form?id=${this.props.formId}&company=${this.props.companyId}`} />;
+        if (this.state.redirectToForm) return <Redirect to={`/form?id=${this.state.redirectToForm}&company=${this.props.companyId}`} />;
         if (this.state.processing) return <Preloader />;
 
         return (
@@ -62,8 +61,8 @@ class CreateForm extends React.Component {
             template: -1,
             errorName: "",
             processing: false,
+            redirectToForm: false,
         });
-        this.props.setActiveFormId({ id: null });
     }
 
     updateInput(value, key) {
@@ -80,18 +79,20 @@ class CreateForm extends React.Component {
         if (!name || !name.trim()) return this.setState({ errorName: "Name can't be empty" });
 
         this.setState({ processing: true });
-        this.props.addForm(name);
+        this.props.addForm(name, (id)=> {
+            this.setState({
+                redirectToForm: id
+            })
+        } );
     }
 }
 
 const mapStateToProps = (state) => ({
-    formId: state.forms.activeFormId,
     companyId: state.companies.activeCompanyId,
 });
 
 const mapDispatchToProps = {
     addForm,
-    setActiveFormId,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateForm);

@@ -5,12 +5,18 @@ import getForm from '../api/getForm'
 import getForms from '../api/getForms'
 import query from "query-string";
 import {setActiveForm, setActiveFormId,setForms} from "../redux/viewFormsSlice";
+import logout from "../../login/api/logout";
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 
 
@@ -22,27 +28,54 @@ class Form extends React.Component {
             <div className={{flexGrow: 1}}>
                 <AppBar position="static">
                     <Toolbar>
-                        <Link to={'?company='  + query.parse(document.location.search).company} style={{color: 'white'}}>
+                        <Link to={'/'} style={{color: 'white'}}>
                             <ArrowBackIcon  edge="start"  aria-label="menu" >
                                 <MenuIcon />
                             </ArrowBackIcon>
                         </Link>
+                        <Typography style={{ marginLeft: "10px" }} variant="h6">
+                            <AssignmentIcon style={{ marginRight: "10px", marginTop:'10px', fontSize:"25px" }} variant="h6"/>
+                        </Typography>
+                        <Typography variant="h6">  {this.props.form ? this.props.form.name : ""} </Typography>
+                        <Typography variant="h6" style={{ flexGrow: "1" }} />
+                        {this.props.children}
+                        <IconButton
+                            aria-label="account of current user"
+                            aria-controls="primary-search-account-menu"
+                            aria-haspopup="true"
+                            color="inherit"
+                            onClick={() => this.setState({ showAccountMenu: true })}
+                        >
+                            <AccountCircle />
+                        </IconButton>
+                        <Menu
+                            anchorEl={"primary-search-account-menu"}
+                            anchorOrigin={{  vertical: 'top', horizontal: 'right', }}
+                            id={1}
+                            keepMounted
+                            transformOrigin={{ vertical: "top", horizontal: "right" }}
+                            anchorPosition={{left:20000, top:40}}
+                            anchorReference={'anchorPosition'}
+                            open={this.state.showAccountMenu}
+                            onClose={() => this.setState({ showAccountMenu: false })}
+                        >
+                            <MenuItem component={Link} to={"/profile"}>
+                                Profile
+                            </MenuItem>
+                            <MenuItem onClick={this.props.logout.bind(this)}>Logout</MenuItem>
+                        </Menu>
+
                     </Toolbar>
-                    <Typography style={{ marginLeft: "10px" }} variant="h6">
-                        {this.getFromName()}
-                    </Typography>
                 </AppBar>
             </div>
         )
     }
 
-    getFromName() {
-        return this.props.form ? this.props.form.name : "0"
-    }
     componentWillMount() {
+        this.props.getForm(query.parse(window.location.search).id)
         this.setState({
-            name: this.props.getForm(query.parse(window.location.search).id)
-        })
+            showAccountMenu: false,
+        });
     }
 }
 
@@ -60,7 +93,8 @@ const mapDispatchToProps = {
     setActiveForm,
     getForm,
     getForms,
-    setForms
+    setForms,
+    logout
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
