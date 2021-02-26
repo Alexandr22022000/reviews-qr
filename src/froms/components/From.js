@@ -18,12 +18,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
-
-
 class Form extends React.Component {
-
     render() {
-
         return (
             <div className={{flexGrow: 1}}>
                 <AppBar position="static">
@@ -85,7 +81,6 @@ const mapStateToProps = (state) => ({
     forms: state.forms.forms,
     company: state.companies.activeCompany,
     companyId: state.companies.activeCompanyId,
-    //* name: state.forms.activeForm || state.forms.activeForm.name
 });
 
 const mapDispatchToProps = {
