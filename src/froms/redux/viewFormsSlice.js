@@ -15,7 +15,6 @@ const slice = createSlice({
     reducers: {
         setForms: (state, { payload }) => {
             state.forms = payload.forms;
-
         },
         setActiveForm: (state, { payload }) => {
             state.activeForm = payload.form;

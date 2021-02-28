@@ -30,7 +30,6 @@ import ShareIcon from "@material-ui/icons/Share";
 import AddIcon from "@material-ui/icons/Add";
 import TextField from "@material-ui/core/TextField";
 import Skeleton from "@material-ui/lab/Skeleton";
-import CompanyPage from "../../companies/components/CompanyPage";
 
 class Navbar extends React.Component {
     render() {
@@ -198,7 +197,6 @@ class Navbar extends React.Component {
                             error={this.state.addCompanyError}
                             helperText={this.state.addCompanyError}
                         />
-
                         <div style={{ "text-align": "right" }}>
                             <Button
                                 style={{ "margin-right": "8px" }}

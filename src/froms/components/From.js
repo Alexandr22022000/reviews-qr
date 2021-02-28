@@ -6,7 +6,6 @@ import getForms from '../api/getForms'
 import query from "query-string";
 import {setActiveForm, setActiveFormId,setForms} from "../redux/viewFormsSlice";
 import logout from "../../login/api/logout";
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -60,7 +59,6 @@ class Form extends React.Component {
                             </MenuItem>
                             <MenuItem onClick={this.props.logout.bind(this)}>Logout</MenuItem>
                         </Menu>
-
                     </Toolbar>
                 </AppBar>
             </div>
