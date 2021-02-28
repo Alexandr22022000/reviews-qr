@@ -3,7 +3,6 @@ const User = require("../../core/models/User"),
 
 module.exports = (req, res) => {
     const { id } = req.query;
-
     if (!id || !id.trim())
         return res.status(400).send({
             message: "Error: id can't be empty",

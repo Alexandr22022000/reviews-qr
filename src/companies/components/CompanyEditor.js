@@ -8,8 +8,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
-import updateCompany from "../../companies/async-actions/updateCompany";
-import delCompany from "../../companies/async-actions/delCompany";
+import updateCompany from "../api/updateCompany";
+import delCompany from "../api/delCompany";
 
 class CompanyEditor extends React.Component {
     render() {

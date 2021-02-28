@@ -2,6 +2,7 @@ const getFormById = require("../getFormById");
 
 module.exports = (req, res) => {
     const { id, questions } = req.body;
+    console.log(req.body)
 
     if (!id || !id.trim())
         return res.status(400).send({

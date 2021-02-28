@@ -2,6 +2,9 @@ import React from "react";
 import Recaptcha from "react-grecaptcha";
 import { Redirect } from "react-router-dom";
 import query from "query-string";
+import { connect } from "react-redux";
+import { addError } from "../redux/viewLoginSlice";
+import restorePassword from "../api/restorePassword";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -9,9 +12,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { connect } from "react-redux";
-import addError from "../actions/addError";
-import restorePassword from "../async_actions/restorePassword";
 
 class RestorePassword extends React.Component {
     render() {
@@ -54,7 +54,7 @@ class RestorePassword extends React.Component {
     }
 
     componentWillMount() {
-        this.props.addError("restore", null, null);
+        this.props.addError({ form: "restore", field: null, msg: null });
         this.setState({
             password: "",
             confirm_password: "",
@@ -86,12 +86,20 @@ class RestorePassword extends React.Component {
     validator = {
         confirm_password: (value) => {
             let isOk = value === this.state.password;
-            this.props.addError("restore", "confirm_password", isOk ? null : "Passwords is not equal");
+            this.props.addError({
+                form: "restore",
+                field: "confirm_password",
+                msg: isOk ? null : "Passwords is not equal",
+            });
             return isOk;
         },
         password: (value) => {
             let isOk = value.length > 6;
-            this.props.addError("restore", "password", isOk ? null : "Password should be more 6 symbols");
+            this.props.addError({
+                form: "restore",
+                field: "password",
+                msg: isOk ? null : "Password should be more 6 symbols",
+            });
             return isOk;
         },
     };
